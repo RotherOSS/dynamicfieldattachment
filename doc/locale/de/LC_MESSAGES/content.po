@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: OTOBO Installation Guide rel-10.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-16 09:24+0200\n"
-"PO-Revision-Date: 2025-01-10 11:21+0000\n"
+"PO-Revision-Date: 2025-01-10 13:21+0000\n"
 "Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
-"Language-Team: German <http://weblate.otobo.org/projects/"
+"Language-Team: German <http://translate.otobo.org/projects/"
 "manual-dynamicfieldattachment/rel-10_1/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -43,11 +43,11 @@ msgstr "Framework"
 
 #: ../../content/index.rst:27
 msgid "OTOBO 10.1.x"
-msgstr ""
+msgstr "OTOBO 10.1.x"
 
 #: ../../content/index.rst:30
 msgid "Packages"
-msgstr ""
+msgstr "Pakete"
 
 #: ../../content/index.rst:31 ../../content/index.rst:35
 msgid "\\-"
