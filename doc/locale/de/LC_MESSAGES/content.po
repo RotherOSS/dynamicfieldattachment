@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-16 09:23+0200\n"
-"PO-Revision-Date: 2025-01-10 13:21+0000\n"
+"PO-Revision-Date: 2025-01-13 11:21+0000\n"
 "Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
 "Language-Team: German <http://translate.otobo.org/projects/"
 "manual-dynamicfieldattachment/master/de/>\n"
@@ -35,7 +35,7 @@ msgstr ""
 
 #: ../../content/index.rst:23
 msgid "System requirements"
-msgstr ""
+msgstr "Systemanforderungen"
 
 #: ../../content/index.rst:26
 msgid "Framework"
@@ -51,7 +51,7 @@ msgstr "Pakete"
 
 #: ../../content/index.rst:31 ../../content/index.rst:35
 msgid "\\-"
-msgstr ""
+msgstr "\\-"
 
 #: ../../content/index.rst:34
 msgid "Third-party software"
@@ -59,7 +59,7 @@ msgstr ""
 
 #: ../../content/index.rst:38
 msgid "Usage"
-msgstr ""
+msgstr "Verwendung"
 
 #: ../../content/index.rst:41
 msgid "Setup"
@@ -187,11 +187,11 @@ msgstr "Kontakt"
 
 #: ../../content/index.rst:115
 msgid "Rother OSS GmbH"
-msgstr ""
+msgstr "Rother OSS GmbH"
 
 #: ../../content/index.rst:116
 msgid "Email: hello@otobo.de"
-msgstr ""
+msgstr "E-Mail: hello@otobo.de"
 
 #: ../../content/index.rst:117
 msgid "Web: https://otobo.de"
@@ -199,10 +199,12 @@ msgstr "Web: https://otobo.de"
 
 #: ../../content/index.rst:120
 msgid "Version"
-msgstr ""
+msgstr "Version"
 
 #: ../../content/index.rst:121
 msgid ""
 "Author: |doc-vendor| / Version: |doc-version| / Date of release: |doc-"
 "datestamp|"
 msgstr ""
+"Autor: |doc-vendor| / Version: |doc-version| / Datum der Veröffentlichung: "
+"|doc-datestamp|"
