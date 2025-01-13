@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - 4dade81e7e04433cb2aed36af0c8727d822a1c61 - Kernel/GenericInterface/Invoker/Ticket/Common.pm
+# $origin: otobo - 4509ec1e750a6bdb5e5033ff54e67680db7e6219 - Kernel/GenericInterface/Invoker/Ticket/Common.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -397,6 +397,11 @@ sub PrepareRequest {
 
             $ArticleRaw{CommunicationChannel} = $ArticleBackendObject->ChannelNameGet();
             push @ArticleBoxRaw, \%ArticleRaw;
+
+            if ( $CountLastArticle == 1 ) {
+                # only consider the latest article
+                last ARTICLE;
+            }
         }
     }
 
@@ -699,11 +704,6 @@ sub PrepareRequest {
         for my $Article (@ArticleBox) {
             my $ClonedArticle = dclone($Article);
             delete $ClonedArticle->{Attachment};
-
-            if ( $CountLastArticle == 1 ) {
-                $ReturnData{Article} = $ClonedArticle;
-                last ARTICLE;
-            }
 
             push @{ $ReturnData{Article} }, $ClonedArticle;
         }
