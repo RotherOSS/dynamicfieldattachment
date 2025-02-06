@@ -742,12 +742,34 @@ EOF
 
     # EO Rother OSS ToDo
 
+    my $VirtualFSObject = $Kernel::OM->Get('Kernel::System::VirtualFS');
+    my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
     my $Index = 1;
     for my $Item (@Values) {
         $Item->{FileID}       = $Index++;
         $Item->{ObjectID}     = $ObjectID;
         $Item->{FieldID}      = $Param{DynamicFieldConfig}->{ID};
         $Item->{DeleteAction} = 'AjaxDynamicFieldAttachment';
+
+        # get attachment content and add it to UploadCache
+        # get data for attachment
+        my %AttachmentData = $VirtualFSObject->Read(
+            Filename => $Item->{StorageLocation},
+            Mode     => 'binary',
+        );
+
+        if (%AttachmentData) {
+            my $Success = $UploadCacheObject->FormIDAddFile(
+                $AttachmentData{Preferences}->%*,
+                FormID      => $UploadFieldUID,
+                Filename    => $Item->{Filename},
+                Content     => $AttachmentData{Content}->$*,
+                ContentID   => $Item->{ContentID},
+                ContentType => $Item->{ContentType},
+                Disposition => 'attachment',
+            );
+            return if !$Success;
+        }
     }
 
     my $HTMLString = $LayoutObject->Output(
