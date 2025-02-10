@@ -295,11 +295,11 @@ sub ValueSet {
 
     # get uploadcache object
     my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
-    my $UploadFieldUID = $Self->{ 'UploadCacheFormID' . $FieldName };
+    my $UploadFieldUID    = $Self->{ 'UploadCacheFormID' . $FieldName };
     my $FormID;
 
     my @Attachments;
-    if ( $UploadFieldUID ) {
+    if ($UploadFieldUID) {
 
         # then we'll need the UploadFieldUID which was stored in $Self
         # by EditFieldValueGet or EditFieldValueValidate and under which, used as FormID
@@ -337,7 +337,7 @@ sub ValueSet {
     ATTACHMENT:
     for my $Item (@Attachments) {
 
-        next ATTACHMENT if (grep { $_->{Filename} eq $Item->{Filename} } $ExistingValues->@*);
+        next ATTACHMENT if ( grep { $_->{Filename} eq $Item->{Filename} } $ExistingValues->@* );
 
         # Now we'll try to store the cached object
         # ObjectID = TicketID or ArticleID
@@ -754,7 +754,7 @@ EOF
 
     # EO Rother OSS ToDo
 
-    my $VirtualFSObject = $Kernel::OM->Get('Kernel::System::VirtualFS');
+    my $VirtualFSObject   = $Kernel::OM->Get('Kernel::System::VirtualFS');
     my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
 
     my $Index = 1;
@@ -918,8 +918,8 @@ sub EditFieldValueGet {
 
         # prevent duplicates
         my @TemporaryAttachments = @Attachments;
-        for my $OldAttachment ($OldStoredAttachments->@*) {
-            if (!grep { $_->{Filename} eq $OldAttachment->{Filename} } @TemporaryAttachments) {
+        for my $OldAttachment ( $OldStoredAttachments->@* ) {
+            if ( !grep { $_->{Filename} eq $OldAttachment->{Filename} } @TemporaryAttachments ) {
                 push @TemporaryAttachments, $OldAttachment;
             }
         }
