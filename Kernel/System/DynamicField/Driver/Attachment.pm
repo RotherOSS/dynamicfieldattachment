@@ -250,11 +250,12 @@ sub ValueGet {
 sub ValueSet {
     my ( $Self, %Param ) = @_;
 
-    if ( IsArrayRefWithData( $Param{Value} ) ) {
-
-        return 1 if !defined $Param{Value}->[0];
-
-        $Param{Value} = $Param{Value}->[0];
+    my @Values;
+    if ( IsHashRefWithData($Param{Value}) ) {
+        push @Values, $Param{Value};
+    }
+    elsif ( IsArrayRefWithData($Param{Value}) ) {
+        @Values = $Param{Values}->@*;
     }
 
     my $FieldName = 'DynamicField_' . $Param{DynamicFieldConfig}->{Name};
