@@ -84,7 +84,7 @@ sub new {
         'IsAttachement'                => 1,
     };
 
-    # get the Dynamic Field Backend custmom extensions
+    # get the Dynamic Field Backend custom extensions
     my $DynamicFieldDriverExtensions
         = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFields::Extension::Driver::Text');
 
@@ -107,7 +107,7 @@ sub new {
             }
         }
 
-        # check if extension contains more behabiors
+        # check if extension contains more behaviors
         if ( IsHashRefWithData( $Extension->{Behaviors} ) ) {
 
             %{ $Self->{Behaviors} } = (
@@ -190,7 +190,7 @@ sub ValueGet {
         . $Param{DynamicFieldConfig}->{ObjectType} . '/'
         . $Param{ObjectID} . '/' . $Param{Filename};
 
-    # Check if we found the file we have to download, and if that recors has a StorageLocation
+        # Check if we found the file we have to download, and if that record has a StorageLocation
     if (
         !@FileFound
         || !IsHashRefWithData( $FileFound[0] )
@@ -867,7 +867,7 @@ sub EditFieldValueGet {
     for ( my $i = 0; $i < $NumberOfFiles; $i++ ) {
 
         # the submitted value looks like 0StoredMyFile.pdf
-        # where 0 is the inded of the stored values and all after "Stored" is the Filename
+        # where 0 is the index of the stored values and all after "Stored" is the Filename
         # we need this to delete gui-deleted files from storage
         # filename necessary to have enough info for displaying the entry on an erroneous submit
         # and ServerError Displaying
@@ -957,8 +957,8 @@ sub EditFieldValueValidate {
         }
 
         # Hash holding all deleted item's FileID's
-        # needed to clenaup $Self->{ 'UploadCacheFilesMeta' . $FieldName } after file deletion
-        # withouth doing an additional sql query, because UploadCacheObject doesn't cache it's meta contents
+        # needed to cleanup $Self->{ 'UploadCacheFilesMeta' . $FieldName } after file deletion
+        # without doing an additional sql query, because UploadCacheObject doesn't cache it's meta contents
         my %Deleted;
 
         # get uploadcache object
@@ -1017,7 +1017,7 @@ sub EditFieldValueValidate {
         }
 
         # Now let's see if we had deleted items and remove them from the $Self->{ 'UploadCacheFilesMeta' . $FieldName }
-        # StoredValues are not beeing deleted here, deletion will be done on save
+        # StoredValues are not being deleted here, deletion will be done on save
         if (%Deleted) {
             @{ $Self->{ 'UploadCacheFilesMeta' . $FieldName } }
                 = grep { $_->{StoredValue} || !$Deleted{ $_->{FileID} } } @{$Values};
@@ -1036,7 +1036,7 @@ sub EditFieldValueValidate {
 sub DisplayValueRender {
     my ( $Self, %Param ) = @_;
 
-    # set HTMLOuput as default if not specified
+    # set HTMLOutput as default if not specified
     if ( !defined $Param{HTMLOutput} ) {
         $Param{HTMLOutput} = 1;
     }
@@ -1211,7 +1211,7 @@ EOF
             );
         }
 
-        # article and ticket type are shown on differen places over the screen
+        # article and ticket type are shown on different places over the screen
         if (
             $Param{DynamicFieldConfig}->{ObjectType} eq 'Article'
             )
@@ -1292,7 +1292,7 @@ sub SearchFieldRender {
     # set the field value
     my $Value = ( defined $Param{DefaultValue} ? $Param{DefaultValue} : '' );
 
-    # get the field value, this fuction is always called after the profile is loaded
+    # get the field value, this function is always called after the profile is loaded
     my $FieldValue = $Self->SearchFieldValueGet(%Param);
 
     # set values from profile if present
@@ -1453,7 +1453,7 @@ sub ReadableValueRender {
     # set new line separator
     my $ItemSeparator = '; ';
 
-    # Ouput transformations
+    # Output transformations
     $Value = join( $ItemSeparator, @ReadableValues );
     $Title = $Value;
 
