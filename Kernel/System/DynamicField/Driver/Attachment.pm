@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2022 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -190,7 +190,7 @@ sub ValueGet {
         . $Param{DynamicFieldConfig}->{ObjectType} . '/'
         . $Param{ObjectID} . '/' . $Param{Filename};
 
-        # Check if we found the file we have to download, and if that record has a StorageLocation
+    # Check if we found the file we have to download, and if that record has a StorageLocation
     if (
         !@FileFound
         || !IsHashRefWithData( $FileFound[0] )
@@ -251,11 +251,11 @@ sub ValueSet {
     my ( $Self, %Param ) = @_;
 
     my @Values;
-    if ( IsHashRefWithData($Param{Value}) ) {
+    if ( IsHashRefWithData( $Param{Value} ) ) {
         push @Values, $Param{Value};
     }
-    elsif ( IsArrayRefWithData($Param{Value}) ) {
-        @Values = $Param{Values}->@*;
+    elsif ( IsArrayRefWithData( $Param{Value} ) ) {
+        @Values = $Param{Value}->@*;
     }
 
     my $FieldName = 'DynamicField_' . $Param{DynamicFieldConfig}->{Name};
@@ -293,40 +293,48 @@ sub ValueSet {
         }
     }
 
-    # then we'll need the UploadFieldUID which was stored in $Self
-    # by EditFieldValueGet or EditFieldValueValidate and under which, used as FormID
-    # the files were stored via the UploadCacheObject
-
     # get uploadcache object
     my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
-    my $UploadFieldUID    = $Self->{ 'UploadCacheFormID' . $FieldName };
+    my $UploadFieldUID;
     my $FormID;
 
-    if ( !$UploadFieldUID && $Param{Value} && $Param{Value}->{FormID} ) {
-        $FormID = $Param{Value}->{FormID};
-    }
-    elsif ( !$UploadFieldUID && $Param{Value} && !$Param{Value}->{FormID} ) {
-        $FormID = $UploadCacheObject->FormIDCreate();
+    my @Attachments;
+    if ( !$Values[0]{Content} ) {
 
-        for my $Attachment ( $Param{Value} ) {
-            if ( $Attachment->{Filename} && $Attachment->{Content} && $Attachment->{ContentType} ) {
-                my $Success = $UploadCacheObject->FormIDAddFile(
-                    FormID      => $FormID,
-                    Filename    => $Attachment->{Filename},
-                    Content     => MIME::Base64::decode_base64( $Attachment->{Content} ),
-                    ContentType => $Attachment->{ContentType},
-                    Disposition => 'attachment',
-                );
-                return if !$Success;
+        # then we'll need the UploadFieldUID which was stored in $Self
+        # by EditFieldValueGet or EditFieldValueValidate and under which, used as FormID
+        # the files were stored via the UploadCacheObject
+        $UploadFieldUID = $Self->{ 'UploadCacheFormID' . $FieldName };
+
+        if ( !$UploadFieldUID && @Values && $Values[0] && $Values[0]{FormID} ) {
+            $FormID = $Values[0]{FormID};
+        }
+        elsif ( !$UploadFieldUID && @Values && $Values[0] && !$Values[0]{FormID} ) {
+            $FormID = $UploadCacheObject->FormIDCreate();
+
+            for my $Attachment (@Values) {
+                if ( $Attachment->{Filename} && $Attachment->{Content} && $Attachment->{ContentType} ) {
+                    my $Success = $UploadCacheObject->FormIDAddFile(
+                        FormID      => $FormID,
+                        Filename    => $Attachment->{Filename},
+                        Content     => MIME::Base64::decode_base64( $Attachment->{Content} ),
+                        ContentType => $Attachment->{ContentType},
+                        Disposition => 'attachment',
+                    );
+                    return if !$Success;
+                }
             }
         }
+
+        return if !$UploadFieldUID && !$FormID;
+
+        @Attachments = $UploadCacheObject->FormIDGetAllFilesData(
+            FormID => $UploadFieldUID // $FormID,
+        );
     }
-
-    return if !$UploadFieldUID && !$FormID;
-
-    my @Attachments = $UploadCacheObject->FormIDGetAllFilesData(
-        FormID => $UploadFieldUID // $FormID,
-    );
+    else {
+        @Attachments = @Values;
+    }
 
     for my $Item (@Attachments) {
 
@@ -367,9 +375,11 @@ sub ValueSet {
     }
 
     # if all files are stored correctly we'll remove the cached ones
-    $UploadCacheObject->FormIDRemove(
-        FormID => $UploadFieldUID // $FormID,
-    );
+    if ( $UploadFieldUID || $FormID ) {
+        $UploadCacheObject->FormIDRemove(
+            FormID => $UploadFieldUID // $FormID,
+        );
+    }
 
     my $Success;
 
