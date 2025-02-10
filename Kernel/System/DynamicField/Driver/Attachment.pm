@@ -295,17 +295,15 @@ sub ValueSet {
 
     # get uploadcache object
     my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
-    my $UploadFieldUID;
+    my $UploadFieldUID = $Self->{ 'UploadCacheFormID' . $FieldName };
     my $FormID;
 
     my @Attachments;
-    if ( !$Values[0]{Content} ) {
+    if ( $UploadFieldUID ) {
 
         # then we'll need the UploadFieldUID which was stored in $Self
         # by EditFieldValueGet or EditFieldValueValidate and under which, used as FormID
         # the files were stored via the UploadCacheObject
-        $UploadFieldUID = $Self->{ 'UploadCacheFormID' . $FieldName };
-
         if ( !$UploadFieldUID && @Values && $Values[0] && $Values[0]{FormID} ) {
             $FormID = $Values[0]{FormID};
         }
@@ -336,7 +334,10 @@ sub ValueSet {
         @Attachments = @Values;
     }
 
+    ATTACHMENT:
     for my $Item (@Attachments) {
+
+        next ATTACHMENT if (grep { $_->{Filename} eq $Item->{Filename} } $ExistingValues->@*);
 
         # Now we'll try to store the cached object
         # ObjectID = TicketID or ArticleID
@@ -753,12 +754,37 @@ EOF
 
     # EO Rother OSS ToDo
 
+    my $VirtualFSObject = $Kernel::OM->Get('Kernel::System::VirtualFS');
+    my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
+
     my $Index = 1;
     for my $Item (@Values) {
         $Item->{FileID}       = $Index++;
         $Item->{ObjectID}     = $ObjectID;
         $Item->{FieldID}      = $Param{DynamicFieldConfig}->{ID};
         $Item->{DeleteAction} = 'AjaxDynamicFieldAttachment';
+
+        # get attachment content and add it to UploadCache
+        # get data for attachment
+        my %AttachmentData = $VirtualFSObject->Read(
+            Filename => $Item->{StorageLocation},
+            Mode     => 'binary',
+        );
+
+        if (%AttachmentData) {
+
+            # upload file into UploadCache
+            my $Success = $UploadCacheObject->FormIDAddFile(
+                $AttachmentData{Preferences}->%*,
+                FormID      => $UploadFieldUID,
+                Filename    => $Item->{Filename},
+                Content     => $AttachmentData{Content}->$*,
+                ContentID   => $Item->{ContentID},
+                ContentType => $Item->{ContentType},
+                Disposition => 'attachment',
+            );
+            return if !$Success;
+        }
     }
 
     my $HTMLString = $LayoutObject->Output(
@@ -889,7 +915,15 @@ sub EditFieldValueGet {
 
     # now let's bring together the info about the old stored attachments as well as the uploaded ones
     if ($OldStoredAttachments) {
-        @Attachments = ( @{$OldStoredAttachments}, @Attachments );
+
+        # prevent duplicates
+        my @TemporaryAttachments = @Attachments;
+        for my $OldAttachment ($OldStoredAttachments->@*) {
+            if (!grep { $_->{Filename} eq $OldAttachment->{Filename} } @TemporaryAttachments) {
+                push @TemporaryAttachments, $OldAttachment;
+            }
+        }
+        @Attachments = @TemporaryAttachments;
     }
 
     $Self->{ 'UploadCacheFilesMeta' . $FieldName } = \@Attachments;
