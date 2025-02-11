@@ -84,7 +84,7 @@ sub new {
     # set Attachment specific field behaviors unless an extension already set it
     $Self->{Behaviors}->{IsSortable}       //= 0;
     $Self->{Behaviors}->{IsStatsCondition} //= 0;
-    $Self->{Behaviors}->{IsAttachment}     //= 0;
+    $Self->{Behaviors}->{IsAttachment}     //= 1;
     $Self->{Behaviors}->{IsSetCapable}     //= 0;
 
     return $Self;
@@ -147,7 +147,7 @@ sub ValueGet {
         . $Param{DynamicFieldConfig}->{ObjectType} . '/'
         . $Param{ObjectID} . '/' . $Param{Filename};
 
-    # Check if we found the file we have to download, and if that recors has a StorageLocation
+    # Check if we found the file we have to download, and if that record has a StorageLocation
     if (
         !@FileFound
         || !IsHashRefWithData( $FileFound[0] )
@@ -211,8 +211,6 @@ sub ValueSet {
         $Param{Value} = [ $Param{Value} ];
     }
 
-    return 1 if !defined $Param{Value}->[0];
-
     my $FieldName = 'DynamicField_' . $Param{DynamicFieldConfig}->{Name};
 
     # For storing our values we need a unique directory structure
@@ -244,39 +242,46 @@ sub ValueSet {
         }
     }
 
-    # then we'll need the UploadFieldUID which was stored in $Self
-    # by EditFieldValueGet or EditFieldValueValidate and under which, used as FormID
-    # the files were stored via the UploadCacheObject
-
     # get uploadcache object
     my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
     my $UploadFieldUID    = $Self->{ 'UploadCacheFormID' . $FieldName };
     my $FormID;
 
-    if ( !$UploadFieldUID && $Param{Value} && $Param{Value}[0] && $Param{Value}[0]{FormID} ) {
-        $FormID = $Param{Value}[0]{FormID};
-    }
-    elsif ( !$UploadFieldUID && $Param{Value} && !$Param{Value}[0] && !$Param{Value}[0]{FormID} ) {
-        $FormID = $UploadCacheObject->FormIDCreate();
+    my @Attachments;
+    if ($UploadFieldUID) {
 
-        for my $Attachment ( $Param{Value} ) {
-            if ( $Attachment->{Filename} && $Attachment->{Content} && $Attachment->{ContentType} ) {
-                my $Success = $UploadCacheObject->FormIDAddFile(
-                    FormID      => $FormID,
-                    Filename    => $Attachment->{Filename},
-                    Content     => MIME::Base64::decode_base64( $Attachment->{Content} ),
-                    ContentType => $Attachment->{ContentType},
-                    Disposition => 'attachment',
-                );
-                return if !$Success;
+        # then we'll need the UploadFieldUID which was stored in $Self
+        # by EditFieldValueGet or EditFieldValueValidate and under which, used as FormID
+        # the files were stored via the UploadCacheObject
+        if ( !$UploadFieldUID && $Param{Value} && $Param{Value}[0] && $Param{Value}[0]{FormID} ) {
+            $FormID = $Param{Value}[0]{FormID};
+        }
+        elsif ( !$UploadFieldUID && $Param{Value} && !$Param{Value}[0] && !$Param{Value}[0]{FormID} ) {
+            $FormID = $UploadCacheObject->FormIDCreate();
+
+            for my $Attachment ( $Param{Value} ) {
+                if ( $Attachment->{Filename} && $Attachment->{Content} && $Attachment->{ContentType} ) {
+                    my $Success = $UploadCacheObject->FormIDAddFile(
+                        FormID      => $FormID,
+                        Filename    => $Attachment->{Filename},
+                        Content     => MIME::Base64::decode_base64( $Attachment->{Content} ),
+                        ContentType => $Attachment->{ContentType},
+                        Disposition => 'attachment',
+                    );
+                    return if !$Success;
+                }
             }
         }
-    }
-    return if !$UploadFieldUID && !$FormID;
 
-    my @Attachments = $UploadCacheObject->FormIDGetAllFilesData(
-        FormID => $UploadFieldUID // $FormID,
-    );
+        return if !$UploadFieldUID && !$FormID;
+
+        @Attachments = $UploadCacheObject->FormIDGetAllFilesData(
+            FormID => $UploadFieldUID // $FormID,
+        );
+    }
+    else {
+        @Attachments = $Param{Value}->@*;
+    }
 
     # delete all values and write again
     my $DeleteSuccess = $Self->ValueDelete(
@@ -331,9 +336,11 @@ sub ValueSet {
     }
 
     # if all files are stored correctly we'll remove the cached ones
-    $UploadCacheObject->FormIDRemove(
-        FormID => $UploadFieldUID // $FormID,
-    );
+    if ( $UploadFieldUID || $FormID ) {
+        $UploadCacheObject->FormIDRemove(
+            FormID => $UploadFieldUID // $FormID,
+        );
+    }
 
     my @ValueText = map {
         {
@@ -472,7 +479,6 @@ sub ValueValidate {
     # get dynamicfieldvalue object
     my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
 
-    # TODO validate mandatory
     my $Success;
     for my $Item (@Values) {
 
@@ -619,6 +625,8 @@ EOF
 
     }
 
+    my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
+
     my $Index = 1;
     for my $Item (@Values) {
         $Item->{FileID}       = $Index++;
@@ -628,7 +636,7 @@ EOF
         $Item->{Disposition}  = 'attachment';
 
         # add attachment to the upload cache
-        $Kernel::OM->Get('Kernel::System::Web::UploadCache')->FormIDAddFile(
+        $UploadCacheObject->FormIDAddFile(
             FormID => $UploadFieldUID,
             $Item->%*,
         );
@@ -792,8 +800,8 @@ sub EditFieldValueValidate {
         }
 
         # Hash holding all deleted item's FileID's
-        # needed to clenaup $Self->{ 'UploadCacheFilesMeta' . $FieldName } after file deletion
-        # withouth doing an additional sql query, because UploadCacheObject doesn't cache it's meta contents
+        # needed to cleanup $Self->{ 'UploadCacheFilesMeta' . $FieldName } after file deletion
+        # without doing an additional sql query, because UploadCacheObject doesn't cache it's meta contents
         my %Deleted;
 
         # get uploadcache object
@@ -852,7 +860,7 @@ sub EditFieldValueValidate {
         }
 
         # Now let's see if we had deleted items and remove them from the $Self->{ 'UploadCacheFilesMeta' . $FieldName }
-        # StoredValues are not beeing deleted here, deletion will be done on save
+        # StoredValues are not being deleted here, deletion will be done on save
         if (%Deleted) {
             @{ $Self->{ 'UploadCacheFilesMeta' . $FieldName } }
                 = grep { $_->{StoredValue} || !$Deleted{ $_->{FileID} } } @{$Values};
@@ -871,7 +879,7 @@ sub EditFieldValueValidate {
 sub DisplayValueRender {
     my ( $Self, %Param ) = @_;
 
-    # set HTMLOuput as default if not specified
+    # set HTMLOutput as default if not specified
     if ( !defined $Param{HTMLOutput} ) {
         $Param{HTMLOutput} = 1;
     }
@@ -1127,7 +1135,7 @@ sub SearchFieldRender {
     # set the field value
     my $Value = ( defined $Param{DefaultValue} ? $Param{DefaultValue} : '' );
 
-    # get the field value, this fuction is always called after the profile is loaded
+    # get the field value, this function is always called after the profile is loaded
     my $FieldValue = $Self->SearchFieldValueGet(%Param);
 
     # set values from profile if present
@@ -1278,7 +1286,7 @@ sub ReadableValueRender {
     # set new line separator
     my $ItemSeparator = '; ';
 
-    # Ouput transformations
+    # Output transformations
     $Value = join( $ItemSeparator, @ReadableValues );
     $Title = $Value;
 
