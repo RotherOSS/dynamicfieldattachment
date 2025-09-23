@@ -543,7 +543,6 @@ sub EditFieldRender {
     # take config from field config
     my $FieldConfig         = $Param{DynamicFieldConfig}->{Config};
     my $FieldName           = 'DynamicField_' . $Param{DynamicFieldConfig}->{Name};
-    my $FieldLabel          = $Param{DynamicFieldConfig}->{Label};
     my $UploadFileAttribute = ${FieldName} . 'UID';
     my $UploadFieldUID      = $Param{ParamObject}->GetParam( Param => $UploadFileAttribute );
 
@@ -599,17 +598,15 @@ sub EditFieldRender {
     my $NumberOfFiles   = $FieldConfig->{NumberOfFiles}   || 16;
     my $MaximumFileSize = $FieldConfig->{MaximumFileSize} || 20;
     $MaximumFileSize = ( $MaximumFileSize * 1024 * 1024 );
-    my $ServerErrorHTML = '';
-    my $IsMandatory     = $Param{Mandatory} || '0';
-    my $IsACLHidden     = $Param{ACLHidden} || '0';
+    my $IsMandatory = $Param{Mandatory} || '0';
+    my $IsACLHidden = $Param{ACLHidden} || '0';
 
-    my $InterfaceAction = $Param{ParamObject}->{Query}->{param}->{Action}[0];
     my $BaseTemplate;
 
-    if ( $InterfaceAction && $InterfaceAction =~ /^Customer/ ) {
+    if ( $Param{CustomerInterface} ) {
 
         $BaseTemplate = <<"EOF";
-                    <div class="Field DFAttachments">
+                    <div class="Field oooAttachments">
                         <div class="DnDUploadBox">
 [% INCLUDE "FormElements/CustomerAttachmentList.tt" FieldID="$FieldName" FieldName="$FieldName" MaxFiles="$NumberOfFiles" MaxSizePerFile="$MaximumFileSize" Mandatory="$IsMandatory" ACLHidden="$IsACLHidden" FormID="$UploadFieldUID"%]
                         </div>
@@ -698,11 +695,6 @@ sub EditFieldValueGet {
         return $Self->{ 'UploadCacheFilesMeta' . $FieldName };
     }
 
-    # just to make sure that we don't end in an infinite loop default it to 16
-    my $NumberOfFiles = $Param{DynamicFieldConfig}->{NumberOfFiles} || 16;
-
-    my $MaximumFileSize = $Param{DynamicFieldConfig}->{MaximumFileSize} || 20;
-
     my $UploadFieldUID = $Param{ParamObject}->GetParam( Param => "${FieldName}UID" );
 
     # if we didn't have a UID we haven't been called by a submit
@@ -735,8 +727,6 @@ sub EditFieldValueGet {
             return [];
         }
     }
-
-    my $Value;
 
     # get uploadcache object
     my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
@@ -884,12 +874,6 @@ sub DisplayValueRender {
         $Param{HTMLOutput} = 1;
     }
 
-    # set Value and Title variables
-    my $Value         = '';
-    my $Title         = '';
-    my $ValueMaxChars = $Param{ValueMaxChars} || '';
-    my $TitleMaxChars = $Param{TitleMaxChars} || '';
-
     # check value
     my @Values;
     if ( ref $Param{Value} eq 'ARRAY' ) {
@@ -920,10 +904,6 @@ sub DisplayValueRender {
 
     # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-    # get real values
-    my $PossibleValues     = $Param{DynamicFieldConfig}->{Config}->{PossibleValues};
-    my $TranslatableValues = $Param{DynamicFieldConfig}->{Config}->{TranslatableValues};
 
     my $FieldName = 'DynamicField_' . $Param{DynamicFieldConfig}->{Name};
     my $Template  = <<'EOF';
@@ -1128,9 +1108,8 @@ sub SearchFieldRender {
     my ( $Self, %Param ) = @_;
 
     # take config from field config
-    my $FieldConfig = $Param{DynamicFieldConfig}->{Config};
-    my $FieldName   = 'Search_DynamicField_' . $Param{DynamicFieldConfig}->{Name};
-    my $FieldLabel  = $Param{DynamicFieldConfig}->{Label};
+    my $FieldName  = 'Search_DynamicField_' . $Param{DynamicFieldConfig}->{Name};
+    my $FieldLabel = $Param{DynamicFieldConfig}->{Label};
 
     # set the field value
     my $Value = ( defined $Param{DefaultValue} ? $Param{DefaultValue} : '' );
@@ -1368,8 +1347,6 @@ sub RandomValueSet {
 
 sub ObjectMatch {
     my ( $Self, %Param ) = @_;
-
-    my $FieldName = $Param{DynamicFieldConfig}->{Name};
 
     # not supported
     return 0;
