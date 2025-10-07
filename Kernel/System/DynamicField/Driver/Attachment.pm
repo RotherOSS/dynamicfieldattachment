@@ -562,7 +562,19 @@ sub EditFieldRender {
     }
 
     my $ObjectTypeStrg = $Param{DynamicFieldConfig}->{ObjectType} eq 'ITSMConfigItem' ? 'ConfigItem' : $Param{DynamicFieldConfig}->{ObjectType};
-    my $ObjectID       = $Param{ParamObject}->GetParam( Param => $ObjectTypeStrg . 'ID' );
+    my $ObjectID;
+    if ( $ObjectTypeStrg eq 'ConfigItem' ) {
+
+        # try duplicate id first
+        $ObjectID = $Param{ParamObject}->GetParam( Param => 'DuplicateID' );
+
+        if ( !$ObjectID ) {
+            $ObjectID = $Param{ParamObject}->GetParam( Param => 'ConfigItemID' );
+        }
+    }
+    else {
+        $ObjectID = $Param{ParamObject}->GetParam( Param => $ObjectTypeStrg . 'ID' );
+    }
 
     # for config item, translate config item id into version id
     if ( $Param{DynamicFieldConfig}{ObjectType} eq 'ITSMConfigItem' && $ObjectID ) {
