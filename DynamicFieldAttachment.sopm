@@ -10,6 +10,7 @@
     <Description Lang="de">Dieses Paket fügt DynamicFields vom Type Attachment hinzu.</Description>
     <Description Lang="hu">Ez a csomag hozzáadja a melléklet típusú dinamikus mezőket.</Description>
     <Filelist>
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/DynamicField/Mask.pm" />
         <File Location="Custom/Kernel/GenericInterface/Operation/Ticket/TicketGet.pm" Permission="644" ></File>
         <File Location="Custom/Kernel/GenericInterface/Invoker/Ticket/Common.pm" Permission="644" ></File>
         <File Location="Kernel/Config/Files/XML/OTOBODynamicFieldAttachment.xml" Permission="644" ></File>
