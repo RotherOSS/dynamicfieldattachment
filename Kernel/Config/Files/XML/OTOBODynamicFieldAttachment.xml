@@ -128,7 +128,7 @@
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-            <Item>Core.Agent.DynamicField.Attachment.js</Item>
+                <Item>Core.Agent.DynamicField.Attachment.js</Item>
             </Array>
         </Value>
     </Setting>
