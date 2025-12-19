@@ -18,10 +18,13 @@ use strict;
 use warnings;
 use utf8;
 
-our $Self;
+use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and $main::Self
+use Kernel::System::UnitTest::Selenium;
 
 # get selenium object
-my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+my $Selenium = Kernel::System::UnitTest::Selenium->new( LogExecuteCommandActive => 1 );
+
+our $Self;
 
 $Selenium->RunTest(
     sub {
@@ -183,7 +186,7 @@ $Selenium->RunTest(
         sleep 2;
 
         $Selenium->find_element( "#Subject", 'css' )->send_keys($TicketSubject);
-        $Selenium->execute_script( 'CKEDITOR.instances.RichText.setData("' . $TicketBody . '");' );
+        $Selenium->execute_script( q{CKEditorInstances['RichText'].setData("' . $TicketBody . '");} );
 
         # we wait a second to make sure the content has been set correctly
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function";' );
@@ -402,4 +405,4 @@ $Selenium->RunTest(
 
 );
 
-1;
+$Self->DoneTesting();

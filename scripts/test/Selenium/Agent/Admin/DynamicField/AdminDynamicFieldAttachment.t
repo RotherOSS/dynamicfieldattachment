@@ -18,10 +18,13 @@ use strict;
 use warnings;
 use utf8;
 
+use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and $main::Self
+use Kernel::System::UnitTest::Selenium;
+
 our $Self;
 
 # get selenium object
-my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+my $Selenium = Kernel::System::UnitTest::Selenium->new( LogExecuteCommandActive => 1 );
 
 $Selenium->RunTest(
     sub {
@@ -58,7 +61,7 @@ $Selenium->RunTest(
         my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
 
         # navigate to AdminDynamiFied screen
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminDynamicField");
+        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminDynamicField;IncludeInvalid=1");
 
         # create DynamicFieldAttachment for ticket and article
         for my $Type (qw(Ticket Article)) {
@@ -212,4 +215,4 @@ JAVASCRIPT
 
 );
 
-1;
+$Self->DoneTesting();

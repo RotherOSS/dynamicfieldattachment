@@ -18,15 +18,20 @@ use strict;
 use warnings;
 use utf8;
 
-our $Self;
-
+# core modules
 use MIME::Base64;
 
+# CPAN modules
+use Test2::V0;
+
+# OTOBO modules
 use Kernel::GenericInterface::Debugger;
 use Kernel::GenericInterface::Operation::Session::SessionCreate;
 use Kernel::GenericInterface::Operation::Ticket::TicketGet;
-
+use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and $main::Self
 use Kernel::System::VariableCheck qw(:all);
+
+our $Self;
 
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
@@ -158,7 +163,10 @@ my $AttachmentDynamicFieldSuccess = $BackendObject->ValueSet(
     DynamicFieldConfig => $AttachmentDynamicFieldConfig,
     ObjectID           => $TicketID,
     Value              => {
-        FormID => $FormID,
+        Filename    => 'somefile.txt',
+        Content     => 'Attachment content',
+        ContentType => 'text/plain',
+        Disposition => 'inline',
     },
     UserID => 1,
 );
@@ -670,4 +678,4 @@ $Self->True(
 # Cleanup cache.
 $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
 
-1;
+$Self->DoneTesting();

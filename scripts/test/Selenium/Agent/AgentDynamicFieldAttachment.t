@@ -18,10 +18,13 @@ use strict;
 use warnings;
 use utf8;
 
+use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and $main::Self
+use Kernel::System::UnitTest::Selenium;
+
 our $Self;
 
 # get selenium object
-my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+my $Selenium = Kernel::System::UnitTest::Selenium->new( LogExecuteCommandActive => 1 );
 
 $Selenium->RunTest(
     sub {
@@ -381,4 +384,4 @@ $Selenium->RunTest(
 
 );
 
-1;
+$Self->DoneTesting();
