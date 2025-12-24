@@ -29,6 +29,7 @@
         <File Location="var/httpd/htdocs/js/Core.Agent.DynamicField.Attachment.js" Permission="644" ></File>
         <File Location="doc/en/OTOBODynamicFieldAttachment.pdf" Permission="644" ></File>
         <File Location="doc/de/OTOBODynamicFieldAttachment.pdf" Permission="644" ></File>
+        <File Permission="660" Location="var/packagesetup/DynamicFieldAttachment.pm" />
         <File Location="var/httpd/htdocs/skins/Customer/default/css/Core.DynamicFieldAttachment.css" Permission="644" ></File>
     </Filelist>
     <IntroInstall Lang="en" Title="Install Information" Type="pre">
@@ -286,4 +287,12 @@
         ((enjoy))&lt;br/&gt;
         &lt;br/&gt;
     </IntroUpgrade>
+    <CodeUninstall Type="pre"><![CDATA[
+
+        # create the package name
+        my $CodeModule = 'var::packagesetup::' . $Param{Structure}->{Name}->{Content};
+
+        $Kernel::OM->Get($CodeModule)->CodeUninstall();
+
+    ]]></CodeUninstall>
 </otobo_package>
