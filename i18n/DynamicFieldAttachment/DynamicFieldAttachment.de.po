@@ -1,0 +1,88 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DynamicFieldAttachment\n"
+"POT-Creation-Date: 2026-03-05 10:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Template: AdminDynamicFieldAttachment
+msgid "Field"
+msgstr "Feld"
+
+#. Template: AdminDynamicFieldAttachment
+msgid "Maximum amount of attachments"
+msgstr "Maximale Anzahl an Anhängen"
+
+#. Template: AdminDynamicFieldAttachment
+msgid "Change this, if you need more or less attachments to be stored in this dynamic field."
+msgstr "Ändern Sie diese Einstellung, wenn Sie mehr oder weniger Dokumente in dieses DynamicField speichern wollen."
+
+#. Template: AdminDynamicFieldAttachment
+msgid "Maximum attachment size"
+msgstr "Maximale Dateigröße"
+
+#. Template: AdminDynamicFieldAttachment
+msgid "Maximum size per attachment in MB for this dynamic field. 0 for no limit."
+msgstr "Maximale Größe pro Anhang in MB für dieses DynamicField. 0 für keine Beschränkung."
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "The maximum of attachments for this dynamic field of type attachment must be a positive number."
+msgstr "Die maximale Anzahl der Anhänge muss eine positive Ganzzahl sein."
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "The maximum attachment size for this dynamic field of type attachment must be a positive number."
+msgstr "Die maximale Größe jedes Anhangs muss eine positive Ganzzahl sein."
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "Need ValidID!"
+msgstr "Benötige ValidID!"
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "Could not create the new field."
+msgstr "Das neue Feld konnte nicht erstellt werden."
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "Need ID!"
+msgstr "Benötige ID!"
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "Could not get data for dynamic field %s!"
+msgstr "Es konnten keine Daten für das dynamische Feld %s abgerufen werden!"
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "Could not update the field %s!"
+msgstr "Das Feld %s konnte nicht aktualisiert werden!"
+
+#. Perl Module: Kernel/Modules/AjaxDynamicFieldAttachment.pm
+msgid "Success"
+msgstr "Erfolg"
+
+#. JS File: Core.Agent.DynamicField.Attachment
+msgid "Disable Attachments"
+msgstr "Anhänge deaktivieren"
+
+#. SysConfig
+msgid "Dynamic Fields Attachment Backend GUI"
+msgstr "Backend-GUI für Anhänge dynamischer Felder"
+
+#. SysConfig
+msgid "Dynamic Fields Attachment download frontend"
+msgstr "Download-Frontend für Anhänge dynamischer Felder"
+
+#. SysConfig
+msgid "Dynamic field backend registration."
+msgstr "Backend-Registrierung für dynamische Felder."
+
+#. SysConfig
+msgid "Dynamic fields extension."
+msgstr "Dynamische Felder Erweiterung."
+
+#. SysConfig
+msgid "List of css files to always be loaded for the customer interface."
+msgstr ""
+

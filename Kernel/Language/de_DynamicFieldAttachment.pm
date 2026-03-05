@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -54,7 +54,8 @@ sub Data {
     $Self->{Translation}->{'Dynamic Fields Attachment download frontend'} = 'Download-Frontend für Anhänge dynamischer Felder';
     $Self->{Translation}->{'Dynamic field backend registration.'} = 'Backend-Registrierung für dynamische Felder.';
     $Self->{Translation}->{'Dynamic fields extension.'} = 'Dynamische Felder Erweiterung.';
-    $Self->{Translation}->{'Frontend module registration for the admin interface.'} = 'Frontend-Modulregistrierung für das Administrator-Interface.';
+    $Self->{Translation}->{'List of css files to always be loaded for the customer interface.'} =
+        '';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (
