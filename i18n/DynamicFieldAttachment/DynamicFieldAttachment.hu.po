@@ -1,0 +1,72 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DynamicFieldAttachment\n"
+"POT-Creation-Date: 2026-03-05 14:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Template: AdminDynamicFieldAttachment
+msgid "Maximum amount of attachments"
+msgstr "Mellékletek legnagyobb száma"
+
+#. Template: AdminDynamicFieldAttachment
+msgid "Change this, if you need more or less attachments to be stored in this dynamic field."
+msgstr "Változtassa meg, ha több vagy kevesebb mellékletet szükséges tárolni ebben a dinamikus mezőben."
+
+#. Template: AdminDynamicFieldAttachment
+msgid "Maximum attachment size"
+msgstr "Legnagyobb mellékletméret"
+
+#. Template: AdminDynamicFieldAttachment
+msgid "Maximum size per attachment in MB for this dynamic field. 0 for no limit."
+msgstr "Legnagyobb méret mellékletenként MB-ban ennél a dinamikus mezőnél. A 0 azt jelenti, hogy nincs korlát."
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "Dynamic field Attachment is not implemented for object type %s!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "The maximum of attachments for this dynamic field of type attachment must be a positive integer."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "The maximum attachment size for this dynamic field of type attachment must be a positive integer."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "The maximum of attachments for this dynamic field of type attachment must be a positive number."
+msgstr "A mellékletek legnagyobb számának ennél a melléklet típusú dinamikus mezőnél pozitív számnak kell lennie."
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "The maximum attachment size for this dynamic field of type attachment must be a positive number."
+msgstr "A legnagyobb mellékletméretnek ennél a melléklet típusú dinamikus mezőnél pozitív számnak kell lennie."
+
+#. JS File: Core.Agent.DynamicField.Attachment
+msgid "Disable Attachments"
+msgstr "Mellékletek letiltása"
+
+#. SysConfig
+msgid "Dynamic Fields Attachment Backend GUI"
+msgstr "Melléklet dinamikus mezők háttérprogram grafikus felhasználói felület"
+
+#. SysConfig
+msgid "Dynamic Fields Attachment download frontend"
+msgstr "Melléklet dinamikus mezők letöltés előtétprogram"
+
+#. SysConfig
+msgid "Dynamic field backend registration."
+msgstr "Dinamikus mező háttérprogram regisztráció."
+
+#. SysConfig
+msgid "Dynamic fields extension."
+msgstr "Dinamikus mező kiterjesztés."
+
+#. SysConfig
+msgid "List of css files to always be loaded for the customer interface."
+msgstr ""
+

@@ -1,0 +1,72 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DynamicFieldAttachment\n"
+"POT-Creation-Date: 2026-03-05 14:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Template: AdminDynamicFieldAttachment
+msgid "Maximum amount of attachments"
+msgstr "Maximale Anzahl an Anhängen"
+
+#. Template: AdminDynamicFieldAttachment
+msgid "Change this, if you need more or less attachments to be stored in this dynamic field."
+msgstr "Ändern Sie diese Einstellung, wenn Sie mehr oder weniger Dokumente in dieses DynamicField speichern wollen."
+
+#. Template: AdminDynamicFieldAttachment
+msgid "Maximum attachment size"
+msgstr "Maximale Dateigröße"
+
+#. Template: AdminDynamicFieldAttachment
+msgid "Maximum size per attachment in MB for this dynamic field. 0 for no limit."
+msgstr "Maximale Größe pro Anhang in MB für dieses DynamicField. 0 für keine Beschränkung."
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "Dynamic field Attachment is not implemented for object type %s!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "The maximum of attachments for this dynamic field of type attachment must be a positive integer."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "The maximum attachment size for this dynamic field of type attachment must be a positive integer."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "The maximum of attachments for this dynamic field of type attachment must be a positive number."
+msgstr "Die maximale Anzahl der Anhänge muss eine positive Ganzzahl sein."
+
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
+msgid "The maximum attachment size for this dynamic field of type attachment must be a positive number."
+msgstr "Die maximale Größe jedes Anhangs muss eine positive Ganzzahl sein."
+
+#. JS File: Core.Agent.DynamicField.Attachment
+msgid "Disable Attachments"
+msgstr "Anhänge deaktivieren"
+
+#. SysConfig
+msgid "Dynamic Fields Attachment Backend GUI"
+msgstr "Dynamic Fields-Oberfläche für Anhänge"
+
+#. SysConfig
+msgid "Dynamic Fields Attachment download frontend"
+msgstr "Dynamic Fields-Download-Frontend für Anhänge"
+
+#. SysConfig
+msgid "Dynamic field backend registration."
+msgstr "Backend-Registrierung für dynamische Felder."
+
+#. SysConfig
+msgid "Dynamic fields extension."
+msgstr "Dynamische Felder Erweiterung."
+
+#. SysConfig
+msgid "List of css files to always be loaded for the customer interface."
+msgstr ""
+
