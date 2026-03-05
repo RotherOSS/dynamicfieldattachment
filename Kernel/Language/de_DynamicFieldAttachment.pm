@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::Language::de_OTOBODynamicFieldAttachment;
+package Kernel::Language::de_DynamicFieldAttachment;
 
 use strict;
 use warnings;
