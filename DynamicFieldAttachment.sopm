@@ -13,8 +13,8 @@
         <File Location="Custom/Kernel/GenericInterface/Operation/Ticket/TicketGet.pm" Permission="644" ></File>
         <File Location="Custom/Kernel/GenericInterface/Invoker/Ticket/Common.pm" Permission="644" ></File>
         <File Location="Kernel/Config/Files/XML/OTOBODynamicFieldAttachment.xml" Permission="644" ></File>
-        <File Location="Kernel/Language/de_OTOBODynamicFieldAttachment.pm" Permission="644" ></File>
-        <File Location="Kernel/Language/hu_OTOBODynamicFieldAttachment.pm" Permission="644" ></File>
+        <File Location="Kernel/Language/de_DynamicFieldAttachment.pm" Permission="644" ></File>
+        <File Location="Kernel/Language/hu_DynamicFieldAttachment.pm" Permission="644" ></File>
         <File Location="Kernel/Modules/AdminDynamicFieldAttachment.pm" Permission="644" ></File>
         <File Location="Kernel/Modules/AgentDynamicFieldAttachment.pm" Permission="644" ></File>
         <File Location="Kernel/Modules/AjaxDynamicFieldAttachment.pm" Permission="644" ></File>
