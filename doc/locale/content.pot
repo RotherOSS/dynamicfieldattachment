@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
-# This file is distributed under the same license as the OTOBO Installation Guide package.
+# Copyright (C) 2019–2026 Rother OSS GmbH, https://otobo.io
+# This file is distributed under the same license as the OTOBO Documentation package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: OTOBO Installation Guide rel-10.1\n"
+"Project-Id-Version: OTOBO Documentation dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-22 04:08+0200\n"
+"POT-Creation-Date: 2026-05-28 11:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,194 +16,193 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../content/index.rst:20
-msgid "Sacrifice to Sphinx"
+#: ../content/index.rst:5
+msgid "Contents"
 msgstr ""
 
-#: ../../content/index.rst:23
+#: ../content/index.rst:10
 msgid "Description"
 msgstr ""
 
-#: ../../content/index.rst:24
+#: ../content/index.rst:11
 msgid "This package adds dynamic fields of type attachment."
 msgstr ""
 
-#: ../../content/index.rst:27
+#: ../content/index.rst:14
 msgid "System requirements"
 msgstr ""
 
-#: ../../content/index.rst:30
+#: ../content/index.rst:17
 msgid "Framework"
 msgstr ""
 
-#: ../../content/index.rst:31
+#: ../content/index.rst:18
 msgid "OTOBO 10.1.x"
 msgstr ""
 
-#: ../../content/index.rst:34
+#: ../content/index.rst:21
 msgid "Packages"
 msgstr ""
 
-#: ../../content/index.rst:35
-#: ../../content/index.rst:39
+#: ../content/index.rst:22
+#: ../content/index.rst:26
 msgid "\\-"
 msgstr ""
 
-#: ../../content/index.rst:38
+#: ../content/index.rst:25
 msgid "Third-party software"
 msgstr ""
 
-#: ../../content/index.rst:42
+#: ../content/index.rst:29
 msgid "Usage"
 msgstr ""
 
-#: ../../content/index.rst:45
+#: ../content/index.rst:32
 msgid "Setup"
 msgstr ""
 
-#: ../../content/index.rst:48
+#: ../content/index.rst:35
 msgid "Configuration Reference"
 msgstr ""
 
-#: ../../content/index.rst:51
+#: ../content/index.rst:38
 msgid "Core::DynamicFields::DriverRegistration"
 msgstr ""
 
-#: ../../content/index.rst:54
+#: ../content/index.rst:41
 msgid "DynamicFields::Driver###Attachment"
 msgstr ""
 
-#: ../../content/index.rst:55
+#: ../content/index.rst:42
 msgid "Dynamic field backend registration."
 msgstr ""
 
-#: ../../content/index.rst:58
+#: ../content/index.rst:45
 msgid "Core::DynamicFields::ExtensionRegistration"
 msgstr ""
 
-#: ../../content/index.rst:61
+#: ../content/index.rst:48
 msgid "DynamicFields::Extension::Backend###107-Attachment"
 msgstr ""
 
-#: ../../content/index.rst:62
+#: ../content/index.rst:49
 msgid "Dynamic fields extension."
 msgstr ""
 
-#: ../../content/index.rst:65
+#: ../content/index.rst:52
 msgid "Frontend::Admin::ModuleRegistration"
 msgstr ""
 
-#: ../../content/index.rst:68
+#: ../content/index.rst:55
 msgid "Frontend::Module###AdminDynamicFieldAttachment"
 msgstr ""
 
-#: ../../content/index.rst:69
+#: ../content/index.rst:56
 msgid "Frontend module registration for the admin interface."
 msgstr ""
 
-#: ../../content/index.rst:72
+#: ../content/index.rst:59
 msgid "Frontend::Admin::ModuleRegistration::Loader"
 msgstr ""
 
-#: ../../content/index.rst:75
+#: ../content/index.rst:62
 msgid "Loader::Module::AdminDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
 msgstr ""
 
-#: ../../content/index.rst:76
-#: ../../content/index.rst:94
+#: ../content/index.rst:63
+#: ../content/index.rst:81
 msgid "Loader module registration for the agent interface."
 msgstr ""
 
-#: ../../content/index.rst:79
+#: ../content/index.rst:66
 msgid "Frontend::Agent::ModuleRegistration"
 msgstr ""
 
-#: ../../content/index.rst:82
+#: ../content/index.rst:69
 msgid "Frontend::Module###AgentDynamicFieldAttachment"
 msgstr ""
 
-#: ../../content/index.rst:83
-#: ../../content/index.rst:87
+#: ../content/index.rst:70
+#: ../content/index.rst:74
 msgid "Frontend module registration for the agent interface."
 msgstr ""
 
-#: ../../content/index.rst:86
+#: ../content/index.rst:73
 msgid "Frontend::Module###AjaxDynamicFieldAttachment"
 msgstr ""
 
-#: ../../content/index.rst:90
+#: ../content/index.rst:77
 msgid "Frontend::Agent::ModuleRegistration::Loader"
 msgstr ""
 
-#: ../../content/index.rst:93
+#: ../content/index.rst:80
 msgid "Loader::Module::AgentDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
 msgstr ""
 
-#: ../../content/index.rst:97
+#: ../content/index.rst:84
 msgid "Frontend::Base::Loader"
 msgstr ""
 
-#: ../../content/index.rst:100
+#: ../content/index.rst:87
 msgid "Loader::Customer::CommonJS###100-Framework"
 msgstr ""
 
-#: ../../content/index.rst:101
+#: ../content/index.rst:88
 msgid "List of JS files to always be loaded for the customer interface."
 msgstr ""
 
-#: ../../content/index.rst:104
+#: ../content/index.rst:91
 msgid "Loader::Agent::CommonJS###100-Framework"
 msgstr ""
 
-#: ../../content/index.rst:105
+#: ../content/index.rst:92
 msgid "List of JS files to always be loaded for the agent interface."
 msgstr ""
 
-#: ../../content/index.rst:108
+#: ../content/index.rst:95
 msgid "Loader::Customer::CommonCSS###000-DynamicFieldAttachment"
 msgstr ""
 
-#: ../../content/index.rst:109
+#: ../content/index.rst:96
 msgid "List of css files to always be loaded for the customer interface."
 msgstr ""
 
-#: ../../content/index.rst:112
+#: ../content/index.rst:99
 msgid "Frontend::Customer::ModuleRegistration"
 msgstr ""
 
-#: ../../content/index.rst:115
+#: ../content/index.rst:102
 msgid "CustomerFrontend::Module###CustomerDynamicFieldAttachment"
 msgstr ""
 
-#: ../../content/index.rst:116
+#: ../content/index.rst:103
 msgid "Frontend module registration for the customer interface."
 msgstr ""
 
-#: ../../content/index.rst:119
+#: ../content/index.rst:106
 msgid "About"
 msgstr ""
 
-#: ../../content/index.rst:122
+#: ../content/index.rst:109
 msgid "Contact"
 msgstr ""
 
-#: ../../content/index.rst:123
+#: ../content/index.rst:110
 msgid "Rother OSS GmbH"
 msgstr ""
 
-#: ../../content/index.rst:124
+#: ../content/index.rst:111
 msgid "Email: hello@otobo.de"
 msgstr ""
 
-#: ../../content/index.rst:125
+#: ../content/index.rst:112
 msgid "Web: https://otobo.de"
 msgstr ""
 
-#: ../../content/index.rst:128
+#: ../content/index.rst:115
 msgid "Version"
 msgstr ""
 
-#: ../../content/index.rst:129
+#: ../content/index.rst:116
 msgid "Author: |doc-vendor| / Version: |doc-version| / Date of release: |doc-datestamp|"
 msgstr ""
-
