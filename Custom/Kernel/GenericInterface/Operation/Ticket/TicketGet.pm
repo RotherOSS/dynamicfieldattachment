@@ -2,9 +2,9 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - e44c18aea9abc125fddf9ceeed204db4fab290e0 - Kernel/GenericInterface/Operation/Ticket/TicketGet.pm
+# $origin: otobo - 6efdc7bf2a3325277cd79a60f0f2407f8ad59e87 - Kernel/GenericInterface/Operation/Ticket/TicketGet.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -350,15 +350,13 @@ sub Run {
         ExcludePlainText => 1,
         ExcludeHTMLBody  => $Param{Data}->{HTMLBodyAsAttachment} ? 0 : 1,
     );
-# ---
-# OTOBODynamicFieldAttachment
-# ---
+# Rother OSS / DynamicFieldAttachment
     my $TicketDynamicFields = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
         Valid      => 1,
         ObjectType => 'Ticket',
     );
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-# ---
+# EO DynamicFieldAttachment
 
     # start ticket loop
     TICKET:
@@ -394,9 +392,7 @@ sub Run {
         for my $Attribute ( sort keys %TicketEntryRaw ) {
 
             if ( $Attribute =~ m{\A DynamicField_(.*) \z}msx ) {
-# ---
-# OTOBODynamicFieldAttachment
-# ---
+# Rother OSS / DynamicFieldAttachment
 #                push @DynamicFields, {
 #                    Name  => $1,
 #                    Value => $TicketEntryRaw{$Attribute},
@@ -441,7 +437,7 @@ sub Run {
                     Name  => $DynamicFieldName,
                     Value => $TicketEntryRaw{$Attribute},
                 };
-# ---
+# EO DynamicFieldAttachment
                 next ATTRIBUTE;
             }
 
