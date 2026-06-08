@@ -40,16 +40,13 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::DB',
+    'Kernel::System::DynamicField::Backend',
     'Kernel::System::DynamicFieldValue',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::Log',
-    'Kernel::System::Main',
+    'Kernel::System::Ticket',
     'Kernel::System::VirtualFS',
     'Kernel::System::Web::UploadCache',
-    'Kernel::System::Web::Request',
-    'Kernel::System::DynamicField::Backend',
-    'Kernel::System::Ticket',
-    'Kernel::System::Ticket::Article',
     'Kernel::System::YAML',
 );
 
@@ -574,6 +571,16 @@ sub EditFieldRender {
     }
     else {
         $ObjectID = $Param{ParamObject}->GetParam( Param => $ObjectTypeStrg . 'ID' );
+
+        # try ticket number, e.g. for CustomerTicketZoom
+        if ( !$ObjectID ) {
+            my $TicketNumber = $Param{ParamObject}->GetParam( Param => 'TicketNumber' );
+            if ($TicketNumber) {
+                $ObjectID = $Kernel::OM->Get('Kernel::System::Ticket')->TicketIDLookup(
+                    TicketNumber => $TicketNumber,
+                );
+            }
+        }
     }
 
     # for config item, translate config item id into version id
@@ -743,7 +750,7 @@ sub EditFieldValueGet {
     # get uploadcache object
     my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
 
-    # Get old stored UploadCache files Metainfo
+    # Get old stored UploadCache files meta info
     my @Attachments = $UploadCacheObject->FormIDGetAllFilesMeta(
         FormID => $UploadFieldUID,
     );
