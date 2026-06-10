@@ -82,7 +82,7 @@ sub new {
     $Self->{Behaviors}->{IsSortable}       //= 0;
     $Self->{Behaviors}->{IsStatsCondition} //= 0;
     $Self->{Behaviors}->{IsAttachment}     //= 1;
-    $Self->{Behaviors}->{IsSetCapable}     //= 0;
+    $Self->{Behaviors}->{IsSetCapable} = 0;
 
     return $Self;
 }
