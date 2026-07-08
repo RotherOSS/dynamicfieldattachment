@@ -53,28 +53,6 @@ sub Run {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    # check if we clone from an existing field
-    my $ObjectType;
-    my $CloneFieldID = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => "ID" );
-    if ($CloneFieldID) {
-        my $FieldConfig = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
-            ID => $CloneFieldID,
-        );
-
-        # if we found a field config, copy its content for usage in _ShowScreen
-        if ( IsHashRefWithData($FieldConfig) ) {
-            $ObjectType = $FieldConfig->{ObjectType};
-        }
-    }
-
-    $ObjectType //= $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'ObjectType' );
-    my $AllowedObjectTypes = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFields::Driver')->{'Attachment'}{'ObjectTypes'};
-    if ( IsArrayRefWithData($AllowedObjectTypes) && !any { $ObjectType eq $_ } $AllowedObjectTypes->@* ) {
-        return $LayoutObject->ErrorScreen(
-            Message => $LayoutObject->{LanguageObject}->Translate( 'Dynamic field Attachment is not implemented for object type %s!', $ObjectType ),
-        );
-    }
-
     if ( $Self->{Subaction} eq 'Add' ) {
         return $Self->_Add(
             %Param,
@@ -121,7 +99,7 @@ sub _Add {
     my %GetParam;
 
     # check if we clone from an existing field
-    my $CloneFieldID = $ParamObject->GetParam( Param => "ID" );
+    my $CloneFieldID = $ParamObject->GetParam( Param => "CloneFieldID" );
     if ($CloneFieldID) {
         my $FieldConfig = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
             ID => $CloneFieldID,
@@ -678,17 +656,20 @@ sub _ChangeAction {
 sub _ShowScreen {
     my ( $Self, %Param ) = @_;
 
+    my $Namespace = $Param{Namespace};
     $Param{DisplayFieldName} = 'New';
 
-    my $Namespace = $Param{Namespace};
-    if ( $Param{Mode} eq 'Change' || ( $Param{Name} && !$Param{CloneFieldID} ) ) {
-        $Param{ShowWarning}      = 'ShowWarning';
-        $Param{DisplayFieldName} = $Param{Name};
+    if ( $Param{Mode} eq 'Change' || $Param{Name} ) {
+
+        if ( !$Param{CloneFieldID} ) {
+            $Param{ShowWarning}      = 'ShowWarning';
+            $Param{DisplayFieldName} = $Param{Name};
+        }
 
         # check for namespace
         if ( $Param{Name} =~ /(.*)-(.*)/ ) {
             $Namespace = $1;
-            $Param{PlainFieldName} = $2;
+            $Param{PlainFieldName} = $2 unless $Param{CloneFieldID};
         }
         else {
             $Param{PlainFieldName} = $Param{Name};
@@ -750,7 +731,7 @@ sub _ShowScreen {
         Class         => 'Modernize W75pc Validate_Number',
     );
 
-    # Selections may be set up in a declaritive way
+    # Selections may be set up in a declarative way
     my $FieldType = $Param{FieldType};
     if ( $Self->{FieldTypeSettings}->{$FieldType} ) {
         for my $Setting ( $Self->{FieldTypeSettings}->{$FieldType}->@* ) {
@@ -824,7 +805,7 @@ sub _ShowScreen {
     # get the field id
     my $FieldID = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'ID' );
 
-    # only if the dymamic field exists and should be edited,
+    # only if the dynamic field exists and should be edited,
     # not if the field is added for the first time
     if ($FieldID) {
 
