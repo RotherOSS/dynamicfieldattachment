@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-16 09:23+0200\n"
-"PO-Revision-Date: 2026-07-13 12:00+0000\n"
+"PO-Revision-Date: 2026-07-13 14:46+0000\n"
 "Last-Translator: Balázs Úr <balazs@urbalazs.hu>\n"
 "Language-Team: Hungarian <http://translate.otobo.org/projects/otobo-11-0/"
 "addons/manuals/dynamicfieldattachment-documentation/hu/>\n"
@@ -119,7 +119,7 @@ msgstr "Betöltőmodul regisztráció az ügyintézői felülethez."
 
 #: ../../content/index.rst:75
 msgid "Frontend::Agent::ModuleRegistration"
-msgstr ""
+msgstr "Frontend::Agent::ModuleRegistration"
 
 #: ../../content/index.rst:78
 msgid "Frontend::Module###AgentDynamicFieldAttachment"
@@ -131,7 +131,7 @@ msgstr "Előtétprogram-modul regisztráció az ügyintézői felülethez."
 
 #: ../../content/index.rst:82
 msgid "Frontend::Agent::ModuleRegistration::Loader"
-msgstr ""
+msgstr "Frontend::Agent::ModuleRegistration::Loader"
 
 #: ../../content/index.rst:85
 msgid "Loader::Module::AgentDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
@@ -169,7 +169,7 @@ msgstr ""
 
 #: ../../content/index.rst:104
 msgid "Frontend::Customer::ModuleRegistration"
-msgstr ""
+msgstr "Frontend::Customer::ModuleRegistration"
 
 #: ../../content/index.rst:107
 msgid "CustomerFrontend::Module###CustomerDynamicFieldAttachment"
@@ -177,7 +177,7 @@ msgstr ""
 
 #: ../../content/index.rst:108
 msgid "Frontend module registration for the customer interface."
-msgstr ""
+msgstr "Előtétprogram-modul regisztráció az ügyfélfelülethez."
 
 #: ../../content/index.rst:111
 msgid "About"
