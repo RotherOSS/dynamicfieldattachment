@@ -32,8 +32,6 @@ sub Data {
         'Maximale Größe pro Anhang in MB für dieses DynamicField. 0 für keine Beschränkung.';
 
     # Perl Module: Kernel/Modules/AdminDynamicFieldAttachment.pm
-    $Self->{Translation}->{'Dynamic field Attachment is not implemented for object type %s!'} =
-        '';
     $Self->{Translation}->{'The maximum of attachments for this dynamic field of type attachment must be a positive integer.'} =
         '';
     $Self->{Translation}->{'The maximum attachment size for this dynamic field of type attachment must be a positive integer.'} =
