@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-16 09:23+0200\n"
-"PO-Revision-Date: 2026-07-13 14:46+0000\n"
+"PO-Revision-Date: 2026-07-14 12:53+0000\n"
 "Last-Translator: Balázs Úr <balazs@urbalazs.hu>\n"
 "Language-Team: Hungarian <http://translate.otobo.org/projects/otobo-11-0/"
 "addons/manuals/dynamicfieldattachment-documentation/hu/>\n"
@@ -103,7 +103,7 @@ msgstr ""
 
 #: ../../content/index.rst:65
 msgid "Frontend module registration for the admin interface."
-msgstr ""
+msgstr "Előtétprogram-modul regisztráció az adminisztrátori felülethez."
 
 #: ../../content/index.rst:68
 msgid "Frontend::Admin::ModuleRegistration::Loader"
