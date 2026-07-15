@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-08 05:08+0000\n"
-"PO-Revision-Date: 2026-07-14 12:21+0000\n"
+"PO-Revision-Date: 2026-07-15 17:00+0000\n"
 "Last-Translator: Balázs Úr <balazs@urbalazs.hu>\n"
 "Language-Team: Hungarian <http://translate.otobo.org/projects/otobo-11-1/"
 "addons/manuals/dynamicfieldattachment-documentation/hu/>\n"
@@ -150,6 +150,7 @@ msgstr ""
 #: ../content/index.rst:84
 msgid "List of JS files to always be loaded for the customer interface."
 msgstr ""
+"JavaScript-fájlok listája, amelyek mindig betöltődnek az ügyfélfelületnél."
 
 #: ../content/index.rst:87
 msgid "Loader::Agent::CommonJS###100-Framework"
