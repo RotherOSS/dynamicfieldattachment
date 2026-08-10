@@ -34,7 +34,7 @@ use MIME::Base64 qw(decode_base64);
 
 # OTOBO modules
 use Kernel::Language              qw(Translatable);
-use Kernel::System::VariableCheck qw(:all);
+use Kernel::System::VariableCheck qw(IsArrayRefWithData IsHashRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -65,7 +65,7 @@ Please look there for a detailed reference of the functions.
 
 =head2 new()
 
-usually, you want to create an instance of this
+Usually, you want to create an instance of this
 by using Kernel::System::DynamicField::Backend->new();
 
 =cut
@@ -75,8 +75,6 @@ sub new {
 
     # Call constructor of the base class.
     my $Self = $Type->SUPER::new;
-
-    # Settings that are specific to the Attachment dynamic field
 
     # set Attachment specific field behaviors unless an extension already set it
     $Self->{Behaviors}->{IsSortable}       //= 0;
@@ -89,12 +87,12 @@ sub new {
 
 =head2 ValueGet()
 
-returns a hash holding the file as well as it's info
+Returns a hash holding the file as well as it's info
 
     my $Attachment = $DynamicFieldDriver->ValueGet(
         DynamicFieldConfig     => \%DynamicFieldConfig,
         ObjectID               => $ObjectID,            # TicketID or ArticleID
-        Download               => 0,                    # or 1, optional, returns file + info if 1
+        Download               => (0|1),                # (optional) returns file + info if 1
         Filename               => 'StarryNight.jpg',    # Required if Download == 1
     );
 
@@ -152,7 +150,6 @@ sub ValueGet {
         || $StorageLocation ne $FileFound[0]->{StorageLocation}
         )
     {
-
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  =>
@@ -187,7 +184,6 @@ sub ValueGet {
         Filename => $FileFound[0]->{StorageLocation},
         Mode     => 'binary',
     );
-
     my $AttachmentInfo = {
         %AttachmentData,
         Filename    => $FileFound[0]->{Filename},
@@ -372,15 +368,14 @@ sub ValueSet {
 sub ValueDelete {
     my ( $Self, %Param ) = @_;
 
+    # get necessary objects
+    my $VirtualFSObject = $Kernel::OM->Get('Kernel::System::VirtualFS');
+
     my $Values = $Self->ValueGet(
         DynamicFieldConfig => $Param{DynamicFieldConfig},
         ObjectID           => $Param{ObjectID},
         UserID             => $Param{UserID},
     );
-
-    # get virtualfs object
-    my $VirtualFSObject = $Kernel::OM->Get('Kernel::System::VirtualFS');
-
     if ( IsArrayRefWithData($Values) ) {
         for my $Item ( @{$Values} ) {
             my $Success = $VirtualFSObject->Delete(
@@ -398,13 +393,11 @@ sub ValueDelete {
         }
     }
 
-    my $Success = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->ValueDelete(
+    return $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->ValueDelete(
         FieldID  => $Param{DynamicFieldConfig}->{ID},
         ObjectID => $Param{ObjectID},
         UserID   => $Param{UserID},
     );
-
-    return $Success;
 }
 
 sub AllValuesDelete {
@@ -413,7 +406,7 @@ sub AllValuesDelete {
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
-    return if !$DBObject->Prepare(
+    return unless $DBObject->Prepare(
         SQL => '
             SELECT id, value_text, value_date, value_int
             FROM dynamic_field_value
@@ -507,11 +500,11 @@ sub SearchSQLGet {
     if ( $Operators{ $Param{Operator} } ) {
         my $SQL = " $Param{TableAlias}.value_text $Operators{$Param{Operator}} '";
         $SQL .= $DBObject->Quote( $Param{SearchTerm} ) . "' ";
+
         return $SQL;
     }
 
     if ( $Param{Operator} eq 'Like' ) {
-
         my $SQL = $DBObject->QueryCondition(
             Key   => "$Param{TableAlias}.value_text",
             Value => $Param{SearchTerm},
@@ -702,9 +695,7 @@ sub EditFieldValueGet {
     # As long as we can't provide files in Templates
     # that should get stored in here
     # we can return undef
-    if ( !$Param{ParamObject} ) {
-        return;
-    }
+    return unless $Param{ParamObject};
 
     my $FieldName = 'DynamicField_' . $Param{DynamicFieldConfig}->{Name};
 
