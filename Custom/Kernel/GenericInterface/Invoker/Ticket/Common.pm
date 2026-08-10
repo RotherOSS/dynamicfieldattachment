@@ -602,6 +602,7 @@ sub PrepareRequest {
                     ObjectID           => $TicketID,
                     Filename           => $Attachment->{Filename},
                     Download           => 1,
+                    SetIndex           => $Attachment->{SetIndex},
                 );
                 next ATTACHMENT if !IsHashRefWithData($Data);
 
