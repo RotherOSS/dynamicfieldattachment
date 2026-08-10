@@ -28,7 +28,7 @@ use parent qw(Kernel::System::DynamicField::Driver::BaseText);
 
 # core modules
 use List::Util   qw(any none);
-use MIME::Base64 qw();
+use MIME::Base64 qw(decode_base64);
 
 # CPAN modules
 
@@ -261,7 +261,7 @@ sub ValueSet {
                     my $Success = $UploadCacheObject->FormIDAddFile(
                         FormID      => $FormID,
                         Filename    => $Attachment->{Filename},
-                        Content     => MIME::Base64::decode_base64( $Attachment->{Content} ),
+                        Content     => decode_base64( $Attachment->{Content} ),
                         ContentType => $Attachment->{ContentType},
                         Disposition => 'attachment',
                     );
