@@ -94,6 +94,7 @@ Returns a hash holding the file as well as it's info
         ObjectID               => $ObjectID,            # TicketID or ArticleID
         Download               => (0|1),                # (optional) returns file + info if 1
         Filename               => 'StarryNight.jpg',    # Required if Download == 1
+        SetIndex               => 5,                    # Required if Download == 1 and field is included in a DynamicField Set
     );
 
 =cut
@@ -746,6 +747,7 @@ sub EditFieldRender {
                 ObjectID => $ObjectID,
                 Download => 1,
                 Filename => $ValueItem->{Filename},
+                SetIndex => $ValueItem->{SetIndex},
                 %Param,
             );
 
@@ -1185,6 +1187,7 @@ EOF
                 Name => 'AttachmentRowLink',
                 Data => {
                     Filename       => $Item->{Filename},
+                    SetIndex       => $Item->{SetIndex},
                     Filesize       => $Item->{Filesize},
                     FieldName      => $FieldName,
                     DynamicFieldID => $FieldID,
@@ -1678,6 +1681,7 @@ sub AttachmentDownload {
         ObjectID           => $Param{ObjectID},
         Download           => 1,
         Filename           => $Param{Filename},
+        SetIndex           => $Param{SetIndex},
     );
 
     if ( !IsHashRefWithData($Attachment) ) {
