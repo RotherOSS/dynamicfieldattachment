@@ -101,7 +101,7 @@ my $AttachmentDynamicFieldID = $DynamicFieldObject->DynamicFieldAdd(
     ValidID    => 1,
     UserID     => 1,
 );
-$Self->True(
+ok(
     $AttachmentDynamicFieldID,
     'Attachment dynamic field created.'
 );
@@ -127,7 +127,7 @@ my $TicketID = $TicketObject->TicketCreate(
 );
 
 # Sanity check.
-$Self->True(
+ok(
     $TicketID,
     "TicketCreate() successful for Ticket One ID $TicketID",
 );
@@ -145,14 +145,14 @@ my $UploadSuccess = $UploadCacheObject->FormIDAddFile(
     Disposition => 'inline',
 );
 
-$Self->True(
+ok(
     $UploadSuccess,
     'Attachment added to the upload cache.'
 );
 
 # Create backend object and delegates.
 my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-$Self->Is(
+is(
     ref $BackendObject,
     'Kernel::System::DynamicField::Backend',
     'Backend object was created successfully',
@@ -170,7 +170,7 @@ my $AttachmentDynamicFieldSuccess = $BackendObject->ValueSet(
     },
     UserID => 1,
 );
-$Self->True(
+ok(
     $AttachmentDynamicFieldSuccess,
     "Dynamic field 'DynamicFieldAttachment$RandomID' is set.",
 );
@@ -183,7 +183,7 @@ my %TicketEntryOne = $TicketObject->TicketGet(
 );
 $TicketEntryOne{TimeUnit} = $TicketObject->TicketAccountedTimeGet( TicketID => $TicketID );
 
-$Self->True(
+ok(
     IsHashRefWithData( \%TicketEntryOne ),
     "TicketGet() successful for Local TicketGet One ID $TicketID",
 );
@@ -249,7 +249,7 @@ my %TicketEntryOneDF = $TicketObject->TicketGet(
 );
 $TicketEntryOneDF{TimeUnit} = $TicketObject->TicketAccountedTimeGet( TicketID => $TicketID );
 
-$Self->True(
+ok(
     IsHashRefWithData( \%TicketEntryOneDF ),
     "TicketGet() successful with DF for Local TicketGet One ID $TicketID",
 );
@@ -272,7 +272,7 @@ my $WebserviceName = '-Test-' . $RandomID;
 
 # Create web-service object.
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
-$Self->Is(
+is(
     'Kernel::System::GenericInterface::Webservice',
     ref $WebserviceObject,
     "Create web service object",
@@ -293,7 +293,7 @@ my $WebserviceID = $WebserviceObject->WebserviceAdd(
     ValidID => 1,
     UserID  => 1,
 );
-$Self->True(
+ok(
     $WebserviceID,
     "Added Web Service",
 );
@@ -369,30 +369,18 @@ my $WebserviceUpdate = $WebserviceObject->WebserviceUpdate(
     ValidID => 1,
     UserID  => $UserID,
 );
-$Self->True(
+ok(
     $WebserviceUpdate,
     "Updated Web Service $WebserviceID - $WebserviceName",
 );
 
 # Get SessionID - create requester object.
 my $RequesterSessionObject = $Kernel::OM->Get('Kernel::GenericInterface::Requester');
-$Self->Is(
+is(
     'Kernel::GenericInterface::Requester',
     ref $RequesterSessionObject,
     "SessionID - Create requester object",
 );
-
-# Start requester with our web-service.
-my $RequesterSessionResult = $RequesterSessionObject->Run(
-    WebserviceID => $WebserviceID,
-    Invoker      => 'SessionCreate',
-    Data         => {
-        UserLogin => $UserLogin,
-        Password  => $Password,
-    },
-);
-
-my $NewSessionID = $RequesterSessionResult->{Data}->{SessionID};
 
 my @Tests = (
     {
@@ -446,7 +434,7 @@ my $DebuggerObject = Kernel::GenericInterface::Debugger->new(
     WebserviceID      => $WebserviceID,
     CommunicationType => 'Provider',
 );
-$Self->Is(
+is(
     ref $DebuggerObject,
     'Kernel::GenericInterface::Debugger',
     'DebuggerObject instantiate correctly',
@@ -460,7 +448,7 @@ for my $Test (@Tests) {
         WebserviceID   => $WebserviceID,
     );
 
-    $Self->Is(
+    is(
         "Kernel::GenericInterface::Operation::Ticket::$Test->{Operation}",
         ref $LocalObject,
         "$Test->{Name} - Create local object",
@@ -485,7 +473,7 @@ for my $Test (@Tests) {
     );
 
     # Check result.
-    $Self->Is(
+    is(
         'HASH',
         ref $LocalResult,
         "$Test->{Name} - Local result structure is valid",
@@ -493,7 +481,7 @@ for my $Test (@Tests) {
 
     # Create requester object.
     my $RequesterObject = $Kernel::OM->Get('Kernel::GenericInterface::Requester');
-    $Self->Is(
+    is(
         'Kernel::GenericInterface::Requester',
         ref $RequesterObject,
         "$Test->{Name} - Create requester object",
@@ -510,13 +498,13 @@ for my $Test (@Tests) {
     );
 
     # Check result.
-    $Self->Is(
+    is(
         'HASH',
         ref $RequesterResult,
         "$Test->{Name} - Requester result structure is valid",
     );
 
-    $Self->Is(
+    is(
         $RequesterResult->{Success},
         $Test->{SuccessRequest},
         "$Test->{Name} - Requester successful result",
@@ -630,7 +618,7 @@ for my $Test (@Tests) {
         my ($DynamicFieldData) = grep { $_->{Name} eq 'DynamicFieldAttachment' . $RandomID }
             @{ $RequesterResult->{Data}->{Ticket}->{DynamicField} };
 
-        $Self->Is(
+        is(
             $DynamicFieldData->{Value}->[0]->{Content},
             "QXR0YWNobWVudCBjb250ZW50\n",
             'Make sure that DynamicField (attachment) has content.'
@@ -645,7 +633,7 @@ my $WebserviceDelete = $WebserviceObject->WebserviceDelete(
     ID     => $WebserviceID,
     UserID => $UserID,
 );
-$Self->True(
+ok(
     $WebserviceDelete,
     "Deleted Web Service $WebserviceID",
 );
@@ -657,7 +645,7 @@ my $TicketDelete = $TicketObject->TicketDelete(
 );
 
 # Sanity check.
-$Self->True(
+ok(
     $TicketDelete,
     "TicketDelete() successful for Ticket ID $TicketID",
 );
@@ -670,7 +658,7 @@ my $DFDelete = $DynamicFieldObject->DynamicFieldDelete(
 );
 
 # Sanity check.
-$Self->True(
+ok(
     $DFDelete,
     "DynamicFieldDelete() successful for Field ID $AttachmentDynamicFieldID",
 );
@@ -678,4 +666,4 @@ $Self->True(
 # Cleanup cache.
 $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
 
-$Self->DoneTesting();
+done_testing;
