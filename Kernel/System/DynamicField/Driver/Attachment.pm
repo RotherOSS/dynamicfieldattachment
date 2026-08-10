@@ -1258,7 +1258,7 @@ EOF
 
     my $Data = {
         Value => $Rendered,
-        Title => undef,
+        Title => '',
         Link  => undef,
     };
 
