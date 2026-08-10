@@ -54,6 +54,8 @@ sub Run {
         $DownloadParams{$Item} = $Value;
     }
 
+    $DownloadParams{SetIndex} = $ParamObject->GetParam( Param => 'SetIndex' );
+
     $DownloadParams{DynamicFieldConfig} = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
         ID => $DownloadParams{DynamicFieldID},
     );
