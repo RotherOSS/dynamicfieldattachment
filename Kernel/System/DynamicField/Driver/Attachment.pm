@@ -403,8 +403,10 @@ sub ValueDelete {
 sub AllValuesDelete {
     my ( $Self, %Param ) = @_;
 
-    # get database object
-    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+    # get necessary objects
+    my $DBObject        = $Kernel::OM->Get('Kernel::System::DB');
+    my $VirtualFSObject = $Kernel::OM->Get('Kernel::System::VirtualFS');
+    my $YAMLObject      = $Kernel::OM->Get('Kernel::System::YAML');
 
     return unless $DBObject->Prepare(
         SQL => '
@@ -415,10 +417,8 @@ sub AllValuesDelete {
         ',
         Bind => [ \$Param{DynamicFieldConfig}->{ID} ],
     );
+
     my @Filenames;
-
-    my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
-
     while ( my @Data = $DBObject->FetchrowArray() ) {
         if ( length $Data[1] ) {
             my $FileInfo = $YAMLObject->Load(
@@ -430,9 +430,6 @@ sub AllValuesDelete {
         }
     }
 
-    # get virtualfs object
-    my $VirtualFSObject = $Kernel::OM->Get('Kernel::System::VirtualFS');
-
     for my $Filename (@Filenames) {
         my $Success = $VirtualFSObject->Delete(
             Filename => $Filename,
@@ -442,20 +439,22 @@ sub AllValuesDelete {
                 'Priority' => 'error',
                 'Message'  => "Could not delete $Filename",
             );
-            return $Success;
+
+            return;
         }
     }
 
-    my $Success = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->AllValuesDelete(
+    return $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->AllValuesDelete(
         FieldID => $Param{DynamicFieldConfig}->{ID},
         UserID  => $Param{UserID},
     );
-
-    return $Success;
 }
 
 sub ValueValidate {
     my ( $Self, %Param ) = @_;
+
+    # get necessary objects
+    my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
 
     # check value
     my @Values;
@@ -466,25 +465,26 @@ sub ValueValidate {
         @Values = ( $Param{Value} );
     }
 
-    # get dynamicfieldvalue object
-    my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
-
     my $Success;
     for my $Item (@Values) {
-
         $Success = $DynamicFieldValueObject->ValueValidate(
             Value => {
                 ValueText => $Item,
             },
             UserID => $Param{UserID}
         );
-        return if !$Success;
+
+        return unless $Success;
     }
+
     return $Success;
 }
 
 sub SearchSQLGet {
     my ( $Self, %Param ) = @_;
+
+    # get necessary objects
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     my %Operators = (
         Equals            => '=',
@@ -493,10 +493,6 @@ sub SearchSQLGet {
         SmallerThan       => '<',
         SmallerThanEquals => '<=',
     );
-
-    # get database object
-    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
     if ( $Operators{ $Param{Operator} } ) {
         my $SQL = " $Param{TableAlias}.value_text $Operators{$Param{Operator}} '";
         $SQL .= $DBObject->Quote( $Param{SearchTerm} ) . "' ";
