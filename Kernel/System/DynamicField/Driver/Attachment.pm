@@ -1041,6 +1041,8 @@ sub DisplayValueRender {
         @Values = ( $Param{Value} );
     }
 
+    my $SetIndex = $Values[0] ? $Values[0]->{SetIndex} : undef;
+
     # return simple string if not HTMLOutput
     if ( !$Param{HTMLOutput} ) {
 
@@ -1066,7 +1068,7 @@ sub DisplayValueRender {
     # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    my $FieldName = 'DynamicField_' . $Param{DynamicFieldConfig}->{Name};
+    my $FieldName = 'DynamicField_' . $Param{DynamicFieldConfig}->{Name} . ( defined $SetIndex ? "_$SetIndex" : '' );
     my $Template  = <<'EOF';
 [% RenderBlockStart("AttachmentHTML") %]
 [% RenderBlockStart("AttachmentHTMLCSSAgent") %]
