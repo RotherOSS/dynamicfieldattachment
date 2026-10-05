@@ -4,209 +4,215 @@
 # Guide package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: OTOBO Installation Guide rel-10.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-28 11:20+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2026-10-05 07:41+0000\n"
+"Last-Translator: Kozo Sakurai <sakurai@io-architect.com>\n"
+"Language-Team: Japanese <http://translate.otobo.org/projects/otobo-10-1/"
+"addons/manuals/dynamicfieldattachment-documentation/ja/>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2026.9\n"
 
 #: ../content/index.rst:5
 msgid "Contents"
-msgstr ""
+msgstr "目次"
 
 #: ../content/index.rst:10
 msgid "Description"
-msgstr ""
+msgstr "説明"
 
 #: ../content/index.rst:11
 msgid "This package adds dynamic fields of type attachment."
-msgstr ""
+msgstr "このパッケージは、添付ファイルタイプのダイナミックフィールドを追加します。"
 
 #: ../content/index.rst:14
 msgid "System requirements"
-msgstr ""
+msgstr "システム要件"
 
 #: ../content/index.rst:17
 msgid "Framework"
-msgstr ""
+msgstr "フレームワーク"
 
 #: ../content/index.rst:18
 msgid "OTOBO 10.1.x"
-msgstr ""
+msgstr "OTOBO 10.1.x"
 
 #: ../content/index.rst:21
 msgid "Packages"
-msgstr ""
+msgstr "パッケージ"
 
 #: ../content/index.rst:22 ../content/index.rst:26
 msgid "\\-"
-msgstr ""
+msgstr "\\-"
 
 #: ../content/index.rst:25
 msgid "Third-party software"
-msgstr ""
+msgstr "サードパーティ製ソフトウェア"
 
 #: ../content/index.rst:29
 msgid "Usage"
-msgstr ""
+msgstr "使い方"
 
 #: ../content/index.rst:32
 msgid "Setup"
-msgstr ""
+msgstr "セットアップ"
 
 #: ../content/index.rst:35
 msgid "Configuration Reference"
-msgstr ""
+msgstr "設定リファレンス"
 
 #: ../content/index.rst:38
 msgid "Core::DynamicFields::DriverRegistration"
-msgstr ""
+msgstr "Core::DynamicFields::DriverRegistration"
 
 #: ../content/index.rst:41
 msgid "DynamicFields::Driver###Attachment"
-msgstr ""
+msgstr "DynamicFields::Driver###Attachment"
 
 #: ../content/index.rst:42
 msgid "Dynamic field backend registration."
-msgstr ""
+msgstr "ダイナミックフィールドのバックエンドの登録。"
 
 #: ../content/index.rst:45
 msgid "Core::DynamicFields::ExtensionRegistration"
-msgstr ""
+msgstr "Core::DynamicFields::ExtensionRegistration"
 
 #: ../content/index.rst:48
 msgid "DynamicFields::Extension::Backend###107-Attachment"
-msgstr ""
+msgstr "DynamicFields::Extension::Backend###107-Attachment"
 
 #: ../content/index.rst:49
 msgid "Dynamic fields extension."
-msgstr ""
+msgstr "ダイナミックフィールドの拡張。"
 
 #: ../content/index.rst:52
 msgid "Frontend::Admin::ModuleRegistration"
-msgstr ""
+msgstr "Frontend::Admin::ModuleRegistration"
 
 #: ../content/index.rst:55
 msgid "Frontend::Module###AdminDynamicFieldAttachment"
-msgstr ""
+msgstr "Frontend::Module###AdminDynamicFieldAttachment"
 
 #: ../content/index.rst:56
 msgid "Frontend module registration for the admin interface."
-msgstr ""
+msgstr "管理者インタフェース用のフロントエンドモジュールの登録。"
 
 #: ../content/index.rst:59
 msgid "Frontend::Admin::ModuleRegistration::Loader"
-msgstr ""
+msgstr "Frontend::Admin::ModuleRegistration::Loader"
 
 #: ../content/index.rst:62
 msgid ""
 "Loader::Module::AdminDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
 msgstr ""
+"Loader::Module::AdminDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
 
 #: ../content/index.rst:63 ../content/index.rst:81
 msgid "Loader module registration for the agent interface."
-msgstr ""
+msgstr "担当者インタフェース用のローダーモジュールの登録。"
 
 #: ../content/index.rst:66
 msgid "Frontend::Agent::ModuleRegistration"
-msgstr ""
+msgstr "Frontend::Agent::ModuleRegistration"
 
 #: ../content/index.rst:69
 msgid "Frontend::Module###AgentDynamicFieldAttachment"
-msgstr ""
+msgstr "Frontend::Module###AgentDynamicFieldAttachment"
 
 #: ../content/index.rst:70 ../content/index.rst:74
 msgid "Frontend module registration for the agent interface."
-msgstr ""
+msgstr "担当者インタフェース用のフロントエンドモジュールの登録。"
 
 #: ../content/index.rst:73
 msgid "Frontend::Module###AjaxDynamicFieldAttachment"
-msgstr ""
+msgstr "Frontend::Module###AjaxDynamicFieldAttachment"
 
 #: ../content/index.rst:77
 msgid "Frontend::Agent::ModuleRegistration::Loader"
-msgstr ""
+msgstr "Frontend::Agent::ModuleRegistration::Loader"
 
 #: ../content/index.rst:80
 msgid ""
 "Loader::Module::AgentDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
 msgstr ""
+"Loader::Module::AgentDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
 
 #: ../content/index.rst:84
 msgid "Frontend::Base::Loader"
-msgstr ""
+msgstr "Frontend::Base::Loader"
 
 #: ../content/index.rst:87
 msgid "Loader::Customer::CommonJS###100-Framework"
-msgstr ""
+msgstr "Loader::Customer::CommonJS###100-Framework"
 
 #: ../content/index.rst:88
 msgid "List of JS files to always be loaded for the customer interface."
-msgstr ""
+msgstr "顧客インタフェースで常に読み込む JS ファイルの一覧。"
 
 #: ../content/index.rst:91
 msgid "Loader::Agent::CommonJS###100-Framework"
-msgstr ""
+msgstr "Loader::Agent::CommonJS###100-Framework"
 
 #: ../content/index.rst:92
 msgid "List of JS files to always be loaded for the agent interface."
-msgstr ""
+msgstr "担当者インタフェースで常に読み込む JS ファイルの一覧。"
 
 #: ../content/index.rst:95
 msgid "Loader::Customer::CommonCSS###000-DynamicFieldAttachment"
-msgstr ""
+msgstr "Loader::Customer::CommonCSS###000-DynamicFieldAttachment"
 
 #: ../content/index.rst:96
 msgid "List of css files to always be loaded for the customer interface."
-msgstr ""
+msgstr "顧客インタフェースで常に読み込む CSS ファイルの一覧。"
 
 #: ../content/index.rst:99
 msgid "Frontend::Customer::ModuleRegistration"
-msgstr ""
+msgstr "Frontend::Customer::ModuleRegistration"
 
 #: ../content/index.rst:102
 msgid "CustomerFrontend::Module###CustomerDynamicFieldAttachment"
-msgstr ""
+msgstr "CustomerFrontend::Module###CustomerDynamicFieldAttachment"
 
 #: ../content/index.rst:103
 msgid "Frontend module registration for the customer interface."
-msgstr ""
+msgstr "顧客インタフェース用のフロントエンドモジュールの登録。"
 
 #: ../content/index.rst:106
 msgid "About"
-msgstr ""
+msgstr "概要"
 
 #: ../content/index.rst:109
 msgid "Contact"
-msgstr ""
+msgstr "連絡先"
 
 #: ../content/index.rst:110
 msgid "Rother OSS GmbH"
-msgstr ""
+msgstr "Rother OSS GmbH"
 
 #: ../content/index.rst:111
 msgid "Email: hello@otobo.de"
-msgstr ""
+msgstr "メール: hello@otobo.de"
 
 #: ../content/index.rst:112
 msgid "Web: https://otobo.de"
-msgstr ""
+msgstr "Web: https://otobo.de"
 
 #: ../content/index.rst:115
 msgid "Version"
-msgstr ""
+msgstr "バージョン"
 
 #: ../content/index.rst:116
 msgid ""
 "Author: |doc-vendor| / Version: |doc-version| / Date of release: |doc-"
 "datestamp|"
 msgstr ""
+"作成者: |doc-vendor| / バージョン: |doc-version| / リリース日: |doc-"
+"datestamp|"
