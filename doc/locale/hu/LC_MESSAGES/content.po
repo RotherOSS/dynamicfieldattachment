@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: OTOBO Installation Guide rel-10.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-28 11:20+0000\n"
-"PO-Revision-Date: 2026-07-14 11:00+0000\n"
+"PO-Revision-Date: 2026-10-13 09:41+0000\n"
 "Last-Translator: Balázs Úr <balazs@urbalazs.hu>\n"
 "Language-Team: Hungarian <http://translate.otobo.org/projects/otobo-10-1/"
 "addons/manuals/dynamicfieldattachment-documentation/hu/>\n"
@@ -18,14 +18,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16\n"
+"X-Generator: Weblate 2026.9\n"
 "Generated-By: Babel 2.4.0\n"
 
 #: ../content/index.rst:5
-#, fuzzy
-#| msgid "Contact"
 msgid "Contents"
-msgstr "Kapcsolat"
+msgstr "Tartalom"
 
 #: ../content/index.rst:10
 msgid "Description"
@@ -147,7 +145,7 @@ msgstr ""
 
 #: ../content/index.rst:84
 msgid "Frontend::Base::Loader"
-msgstr ""
+msgstr "Frontend::Base::Loader"
 
 #: ../content/index.rst:87
 msgid "Loader::Customer::CommonJS###100-Framework"
@@ -156,6 +154,7 @@ msgstr ""
 #: ../content/index.rst:88
 msgid "List of JS files to always be loaded for the customer interface."
 msgstr ""
+"JavaScript-fájlok listája, amelyek mindig betöltődnek az ügyfélfelületnél."
 
 #: ../content/index.rst:91
 msgid "Loader::Agent::CommonJS###100-Framework"
@@ -175,7 +174,7 @@ msgstr ""
 
 #: ../content/index.rst:99
 msgid "Frontend::Customer::ModuleRegistration"
-msgstr ""
+msgstr "Frontend::Customer::ModuleRegistration"
 
 #: ../content/index.rst:102
 msgid "CustomerFrontend::Module###CustomerDynamicFieldAttachment"
@@ -183,7 +182,7 @@ msgstr ""
 
 #: ../content/index.rst:103
 msgid "Frontend module registration for the customer interface."
-msgstr ""
+msgstr "Előtétprogram-modul regisztráció az ügyfélfelülethez."
 
 #: ../content/index.rst:106
 msgid "About"
