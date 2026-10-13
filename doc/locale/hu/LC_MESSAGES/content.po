@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: OTOBO Installation Guide rel-10.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-28 11:20+0000\n"
-"PO-Revision-Date: 2026-10-13 09:41+0000\n"
+"PO-Revision-Date: 2026-10-13 15:41+0000\n"
 "Last-Translator: Balázs Úr <balazs@urbalazs.hu>\n"
 "Language-Team: Hungarian <http://translate.otobo.org/projects/otobo-10-1/"
 "addons/manuals/dynamicfieldattachment-documentation/hu/>\n"
@@ -31,7 +31,7 @@ msgstr "Leírás"
 
 #: ../content/index.rst:11
 msgid "This package adds dynamic fields of type attachment."
-msgstr ""
+msgstr "Ez a csomag melléklet típusú dinamikus mezőket ad hozzá."
 
 #: ../content/index.rst:14
 msgid "System requirements"
@@ -75,23 +75,23 @@ msgstr "Core::DynamicFields::DriverRegistration"
 
 #: ../content/index.rst:41
 msgid "DynamicFields::Driver###Attachment"
-msgstr ""
+msgstr "DynamicFields::Driver###Attachment"
 
 #: ../content/index.rst:42
 msgid "Dynamic field backend registration."
-msgstr ""
+msgstr "Dinamikus mező háttérprogram regisztráció."
 
 #: ../content/index.rst:45
 msgid "Core::DynamicFields::ExtensionRegistration"
-msgstr ""
+msgstr "Core::DynamicFields::ExtensionRegistration"
 
 #: ../content/index.rst:48
 msgid "DynamicFields::Extension::Backend###107-Attachment"
-msgstr ""
+msgstr "DynamicFields::Extension::Backend###107-Attachment"
 
 #: ../content/index.rst:49
 msgid "Dynamic fields extension."
-msgstr ""
+msgstr "Dinamikus mezők kiterjesztése."
 
 #: ../content/index.rst:52
 msgid "Frontend::Admin::ModuleRegistration"
@@ -99,11 +99,11 @@ msgstr "Frontend::Admin::ModuleRegistration"
 
 #: ../content/index.rst:55
 msgid "Frontend::Module###AdminDynamicFieldAttachment"
-msgstr ""
+msgstr "Frontend::Module###AdminDynamicFieldAttachment"
 
 #: ../content/index.rst:56
 msgid "Frontend module registration for the admin interface."
-msgstr ""
+msgstr "Előtétprogram-modul regisztráció az adminisztrátori felülethez."
 
 #: ../content/index.rst:59
 msgid "Frontend::Admin::ModuleRegistration::Loader"
@@ -113,6 +113,7 @@ msgstr "Frontend::Admin::ModuleRegistration::Loader"
 msgid ""
 "Loader::Module::AdminDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
 msgstr ""
+"Loader::Module::AdminDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
 
 #: ../content/index.rst:63 ../content/index.rst:81
 msgid "Loader module registration for the agent interface."
@@ -124,7 +125,7 @@ msgstr "Frontend::Agent::ModuleRegistration"
 
 #: ../content/index.rst:69
 msgid "Frontend::Module###AgentDynamicFieldAttachment"
-msgstr ""
+msgstr "Frontend::Module###AgentDynamicFieldAttachment"
 
 #: ../content/index.rst:70 ../content/index.rst:74
 msgid "Frontend module registration for the agent interface."
@@ -132,7 +133,7 @@ msgstr "Előtétprogram-modul regisztráció az ügyintézői felülethez."
 
 #: ../content/index.rst:73
 msgid "Frontend::Module###AjaxDynamicFieldAttachment"
-msgstr ""
+msgstr "Frontend::Module###AjaxDynamicFieldAttachment"
 
 #: ../content/index.rst:77
 msgid "Frontend::Agent::ModuleRegistration::Loader"
@@ -142,6 +143,7 @@ msgstr "Frontend::Agent::ModuleRegistration::Loader"
 msgid ""
 "Loader::Module::AgentDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
 msgstr ""
+"Loader::Module::AgentDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
 
 #: ../content/index.rst:84
 msgid "Frontend::Base::Loader"
@@ -149,7 +151,7 @@ msgstr "Frontend::Base::Loader"
 
 #: ../content/index.rst:87
 msgid "Loader::Customer::CommonJS###100-Framework"
-msgstr ""
+msgstr "Loader::Customer::CommonJS###100-Framework"
 
 #: ../content/index.rst:88
 msgid "List of JS files to always be loaded for the customer interface."
@@ -158,19 +160,21 @@ msgstr ""
 
 #: ../content/index.rst:91
 msgid "Loader::Agent::CommonJS###100-Framework"
-msgstr ""
+msgstr "Loader::Agent::CommonJS###100-Framework"
 
 #: ../content/index.rst:92
 msgid "List of JS files to always be loaded for the agent interface."
 msgstr ""
+"JavaScript-fájlok listája, amelyek mindig betöltődnek az ügyintézői "
+"felületnél."
 
 #: ../content/index.rst:95
 msgid "Loader::Customer::CommonCSS###000-DynamicFieldAttachment"
-msgstr ""
+msgstr "Loader::Customer::CommonCSS###000-DynamicFieldAttachment"
 
 #: ../content/index.rst:96
 msgid "List of css files to always be loaded for the customer interface."
-msgstr ""
+msgstr "CSS fájlok listája, amelyek mindig betöltődnek az ügyfélfelületnél."
 
 #: ../content/index.rst:99
 msgid "Frontend::Customer::ModuleRegistration"
@@ -178,7 +182,7 @@ msgstr "Frontend::Customer::ModuleRegistration"
 
 #: ../content/index.rst:102
 msgid "CustomerFrontend::Module###CustomerDynamicFieldAttachment"
-msgstr ""
+msgstr "CustomerFrontend::Module###CustomerDynamicFieldAttachment"
 
 #: ../content/index.rst:103
 msgid "Frontend module registration for the customer interface."
