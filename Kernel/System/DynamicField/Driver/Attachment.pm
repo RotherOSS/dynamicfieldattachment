@@ -27,7 +27,6 @@ use utf8;
 use parent qw(Kernel::System::DynamicField::Driver::BaseText);
 
 # core modules
-use List::Util   qw(any none);
 use MIME::Base64 qw();
 
 # CPAN modules
@@ -220,65 +219,118 @@ sub ValueSet {
     # get virtualfs object
     my $VirtualFSObject = $Kernel::OM->Get('Kernel::System::VirtualFS');
 
-    # At first let's see if we have already stored values in the Filesystem & Database
+    # files which are already stored for this object, e.g. when files are kept in an update
     my $ExistingValues = $Self->ValueGet(
         DynamicFieldConfig => $Param{DynamicFieldConfig},
         ObjectID           => $Param{ObjectID},
     ) || [];
-
-    my @ValuesToStore;
+    my %ExistingByFilename = map { $_->{Filename} => $_ } @{$ExistingValues};
 
     my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
-
-    # Keep old stored files if they are present in param
-    if ( @{$ExistingValues} ) {
-        for my $Item ( @{$ExistingValues} ) {
-            if ( any { $Item->{Filename} eq $_->{Filename} } $Param{Value}->@* ) {
-                push @ValuesToStore, $Item;
-            }
-        }
-    }
 
     # get uploadcache object
     my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
     my $UploadFieldUID    = $Self->{ 'UploadCacheFormID' . $FieldName . ( $Param{DynamicFieldConfig}{ProcessSuffix} // '' ) };
-    my $FormID;
 
+    # collect all files to store, every file with its content
     my @Attachments;
     if ($UploadFieldUID) {
 
-        # then we'll need the UploadFieldUID which was stored in $Self
-        # by EditFieldValueGet or EditFieldValueValidate and under which, used as FormID
-        # the files were stored via the UploadCacheObject
-        if ( !$UploadFieldUID && $Param{Value} && $Param{Value}[0] && $Param{Value}[0]{FormID} ) {
-            $FormID = $Param{Value}[0]{FormID};
-        }
-        elsif ( !$UploadFieldUID && $Param{Value} && !$Param{Value}[0] && !$Param{Value}[0]{FormID} ) {
-            $FormID = $UploadCacheObject->FormIDCreate();
-
-            for my $Attachment ( $Param{Value} ) {
-                if ( $Attachment->{Filename} && $Attachment->{Content} && $Attachment->{ContentType} ) {
-                    my $Success = $UploadCacheObject->FormIDAddFile(
-                        FormID      => $FormID,
-                        Filename    => $Attachment->{Filename},
-                        Content     => MIME::Base64::decode_base64( $Attachment->{Content} ),
-                        ContentType => $Attachment->{ContentType},
-                        Disposition => 'attachment',
-                    );
-                    return if !$Success;
-                }
-            }
-        }
-
-        return if !$UploadFieldUID && !$FormID;
-
+        # files uploaded in the frontend, stored in the upload cache by EditFieldValueGet()
         @Attachments = $UploadCacheObject->FormIDGetAllFilesData(
-            FormID => $UploadFieldUID // $FormID,
+            FormID => $UploadFieldUID,
         );
     }
     else {
-        @Attachments = $Param{Value}->@*;
+        my %SeenFilename;
+
+        ITEM:
+        for my $Item ( $Param{Value}->@* ) {
+
+            # an empty value removes all files
+            next ITEM if !defined $Item;
+            next ITEM if !ref $Item && $Item eq '';
+
+            # anything else must be a file, otherwise nothing is changed,
+            # e.g. a list of filenames from a CSV import must not remove the stored files
+            if ( !IsHashRefWithData($Item) || !IsStringWithData( $Item->{Filename} ) ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Invalid value for $FieldName of $ObjectType $Param{ObjectID}: expected a list of files with Filename!",
+                );
+
+                return;
+            }
+
+            # every file is stored under its filename, so a filename must be unique
+            if ( $SeenFilename{ $Item->{Filename} }++ ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Duplicate filename $Item->{Filename} for $FieldName of $ObjectType $Param{ObjectID}!",
+                );
+
+                return;
+            }
+
+            my %Attachment = $Item->%*;
+
+            if ( defined $Attachment{Content} ) {
+
+                # new file from an external source, e.g. a web service: the content is base64 encoded
+                if ( $Param{ExternalSource} ) {
+                    $Attachment{Content} = MIME::Base64::decode_base64( $Attachment{Content} );
+                }
+            }
+            else {
+
+                # already stored file, e.g. kept in an update or copied to a new config item version:
+                # read the content now, the existing files of this object are deleted below
+                my $StorageLocation;
+                if ( $ExistingByFilename{ $Attachment{Filename} } ) {
+                    $StorageLocation = $ExistingByFilename{ $Attachment{Filename} }->{StorageLocation};
+                }
+
+                # Internal callers may pass the storage location of a file of this field,
+                # e.g. when the values are copied to a new config item version.
+                # A storage location from an external source is never used, as it could
+                # point to a file of an object the caller has no access to.
+                my $StorageLocationPrefix = "DynamicField/$FieldID/$ObjectType/";
+                if (
+                    !$Param{ExternalSource}
+                    && IsStringWithData( $Attachment{StorageLocation} )
+                    && index( $Attachment{StorageLocation}, $StorageLocationPrefix ) == 0
+                    )
+                {
+                    $StorageLocation = $Attachment{StorageLocation};
+                }
+
+                # unknown file without content: nothing to keep
+                next ITEM unless $StorageLocation;
+
+                my %File = $VirtualFSObject->Read(
+                    Filename => $StorageLocation,
+                    Mode     => 'binary',
+                );
+                if ( !%File ) {
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'error',
+                        Message  => "Cannot read attachment $StorageLocation for $ObjectType $Param{ObjectID}",
+                    );
+
+                    return;
+                }
+
+                $Attachment{Content} = ${ $File{Content} };
+                $Attachment{ContentType} ||= $File{Preferences}->{ContentType};
+            }
+
+            $Attachment{Filesize} = length $Attachment{Content};
+
+            push @Attachments, \%Attachment;
+        }
     }
+
+    my @ValuesToStore;
 
     # delete all values and write again
     my $DeleteSuccess = $Self->ValueDelete(
@@ -321,21 +373,18 @@ sub ValueSet {
             return;
         }
 
-        if ( none { $Item->{Filename} eq $_->{Filename} } @ValuesToStore ) {
-
-            push @ValuesToStore, {
-                Filename        => $Item->{Filename},
-                StorageLocation => "DynamicField/$FieldID/$ObjectType/$Param{ObjectID}/$Item->{Filename}",
-                Filesize        => $Item->{Filesize},
-                ContentType     => $Item->{ContentType},
-            };
-        }
+        push @ValuesToStore, {
+            Filename        => $Item->{Filename},
+            StorageLocation => "DynamicField/$FieldID/$ObjectType/$Param{ObjectID}/$Item->{Filename}",
+            Filesize        => $Item->{Filesize},
+            ContentType     => $Item->{ContentType},
+        };
     }
 
     # if all files are stored correctly we'll remove the cached ones
-    if ( $UploadFieldUID || $FormID ) {
+    if ($UploadFieldUID) {
         $UploadCacheObject->FormIDRemove(
-            FormID => $UploadFieldUID // $FormID,
+            FormID => $UploadFieldUID,
         );
     }
 
@@ -1555,3 +1604,4 @@ sub AttachmentDownload {
 }
 
 1;
+
