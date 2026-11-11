@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-08 05:08+0000\n"
-"PO-Revision-Date: 2026-11-11 09:00+0000\n"
+"PO-Revision-Date: 2026-11-11 11:00+0000\n"
 "Last-Translator: Jasmin Hammes <jasmin.hammes@rother-oss.com>\n"
 "Language-Team: German <http://translate.otobo.org/projects/otobo-11-1/addons/"
 "manuals/dynamicfieldattachment-documentation/de/>\n"
@@ -73,35 +73,35 @@ msgstr "Konfigurations-Referenz"
 
 #: ../content/index.rst:38
 msgid "Core::DynamicFields::DriverRegistration"
-msgstr ""
+msgstr "Core::DynamicFields::DriverRegistration"
 
 #: ../content/index.rst:41
 msgid "DynamicFields::Driver###Attachment"
-msgstr ""
+msgstr "DynamicFields::Driver###Attachment"
 
 #: ../content/index.rst:42
 msgid "Dynamic field backend registration."
-msgstr ""
+msgstr "Backend-Registrierung für dynamisches Feld."
 
 #: ../content/index.rst:45
 msgid "Core::DynamicFields::ExtensionRegistration"
-msgstr ""
+msgstr "Core::DynamicFields::ExtensionRegistration"
 
 #: ../content/index.rst:48
 msgid "DynamicFields::Extension::Backend###107-Attachment"
-msgstr ""
+msgstr "DynamicFields::Extension::Backend###107-Attachment"
 
 #: ../content/index.rst:49
 msgid "Dynamic fields extension."
-msgstr ""
+msgstr "Erweiterung dynamischer Felder."
 
 #: ../content/index.rst:52
 msgid "Frontend::Admin::ModuleRegistration"
-msgstr ""
+msgstr "Frontend::Admin::ModuleRegistration"
 
 #: ../content/index.rst:55
 msgid "Frontend::Module###AdminDynamicFieldAttachment"
-msgstr ""
+msgstr "Frontend::Module###AdminDynamicFieldAttachment"
 
 #: ../content/index.rst:56
 msgid "Frontend module registration for the admin interface."
@@ -109,77 +109,85 @@ msgstr ""
 
 #: ../content/index.rst:59
 msgid "Frontend::Admin::ModuleRegistration::Loader"
-msgstr ""
+msgstr "Frontend::Admin::ModuleRegistration::Loader"
 
 #: ../content/index.rst:62
 msgid ""
 "Loader::Module::AdminDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
 msgstr ""
+"Loader::Module::AdminDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
 
 #: ../content/index.rst:63 ../content/index.rst:77
 msgid "Loader module registration for the agent interface."
-msgstr ""
+msgstr "Registrierung des Loader-Moduls für die Agentenoberfläche."
 
 #: ../content/index.rst:66
 msgid "Frontend::Agent::ModuleRegistration"
-msgstr ""
+msgstr "Frontend::Agent::ModuleRegistration"
 
 #: ../content/index.rst:69
 msgid "Frontend::Module###AgentDynamicFieldAttachment"
-msgstr ""
+msgstr "Frontend::Module###AgentDynamicFieldAttachment"
 
 #: ../content/index.rst:70
 msgid "Frontend module registration for the agent interface."
-msgstr ""
+msgstr "Registrierung des Frontend-Moduls für die Agentenoberfläche."
 
 #: ../content/index.rst:73
 msgid "Frontend::Agent::ModuleRegistration::Loader"
-msgstr ""
+msgstr "Frontend::Agent::ModuleRegistration::Loader"
 
 #: ../content/index.rst:76
 msgid ""
 "Loader::Module::AgentDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
 msgstr ""
+"Loader::Module::AgentDynamicFieldAttachment###002-OTOBODynamicFieldAttachment"
 
 #: ../content/index.rst:80
 msgid "Frontend::Base::Loader"
-msgstr ""
+msgstr "Frontend::Base::Loader"
 
 #: ../content/index.rst:83
 msgid "Loader::Customer::CommonJS###100-Framework"
-msgstr ""
+msgstr "Loader::Customer::CommonJS###100-Framework"
 
 #: ../content/index.rst:84
 msgid "List of JS files to always be loaded for the customer interface."
 msgstr ""
+"Liste der JS-Dateien, die für die Kundenoberfläche immer geladen werden "
+"sollen."
 
 #: ../content/index.rst:87
 msgid "Loader::Agent::CommonJS###100-Framework"
-msgstr ""
+msgstr "Loader::Agent::CommonJS###100-Framework"
 
 #: ../content/index.rst:88
 msgid "List of JS files to always be loaded for the agent interface."
 msgstr ""
+"Liste der JS-Dateien, die für die Agentenoberfläche immer geladen werden "
+"sollen."
 
 #: ../content/index.rst:91
 msgid "Loader::Customer::CommonCSS###000-DynamicFieldAttachment"
-msgstr ""
+msgstr "Loader::Customer::CommonCSS###000-DynamicFieldAttachment"
 
 #: ../content/index.rst:92
 msgid "List of css files to always be loaded for the customer interface."
 msgstr ""
+"Liste der CSS-Dateien, die für die Kundenoberfläche immer geladen werden "
+"sollen."
 
 #: ../content/index.rst:95
 msgid "Frontend::Customer::ModuleRegistration"
-msgstr ""
+msgstr "Frontend::Customer::ModuleRegistration"
 
 #: ../content/index.rst:98
 msgid "CustomerFrontend::Module###CustomerDynamicFieldAttachment"
-msgstr ""
+msgstr "CustomerFrontend::Module###CustomerDynamicFieldAttachment"
 
 #: ../content/index.rst:99
 msgid "Frontend module registration for the customer interface."
-msgstr ""
+msgstr "Registrierung des Frontend-Moduls für die Kundenoberfläche."
 
 #: ../content/index.rst:102
 msgid "About"
